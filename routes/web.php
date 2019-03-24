@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
+// If we are making a spa, we need to say, on the laravel route sense response to anything at all
+// we gonna let our javascript handel the accurate routing.
+
+// {any?} response to anything or nothing
+Route::get('/{any?}', function () {
     return view('welcome');
 });
