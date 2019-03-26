@@ -5,33 +5,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laracasts Assets</title>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
         <link rel="stylesheet" href="/css/app.css">
     </head>
     <body class="font-sans">
         <div id="app">
             <div class="container mx-auto">
-                <header class="py-6">
-                    <h1>Laracasts</h1>
+                <header class="py-6 mb-8">
+                    <h1>
+                        <img alt="Laracasts" src="/images/logo.svg">
+                    </h1>
                 </header>
 
                 <main class="flex">
                     <aside class="w-1/5">
                         <section class="mb-8">
-                            <h5 class="uppercase font-bold">The Brand</h5>
+                            <h5 class="uppercase font-bold mb-3">The Brand</h5>
                             
-                            <ul>
-                                <li><router-link to="/">Home</router-link></li>
-                                <li><router-link to="/about">About</router-link></li> 
+                            <ul class="list-reset">
+                                <li class="text-sm leading-loose"><router-link to="/" class="text-black">Logo</router-link></li>
+                                <li class="text-sm leading-loose"><router-link to="/about" class="text-black">Logo Symbol</router-link></li> 
+                                <li class="text-sm leading-loose"><router-link to="/about" class="text-black">Colors</router-link></li> 
+                                <li class="text-sm leading-loose"><router-link to="/about" class="text-black">Typography</router-link></li> 
                                 {{-- <router-link :to="{ name: 'about' }">About</router-link> --}}
                             </ul>
                         </section>
                         <section>
-                            <h5 class="uppercase font-bold">Doodles</h5>
+                            <h5 class="uppercase font-bold mb-3">Doodles</h5>
 
-                            <ul>
-                                <li><router-link to="/">Home</router-link></li>
-                                <li><router-link to="/about">About</router-link></li> 
+                            <ul class="list-reset">
+                                <li class="text-sm leading-loose"><router-link to="/" class="text-black">Mascot</router-link></li>
+                                <li class="text-sm leading-loose"><router-link to="/about" class="text-black">Illustrations</router-link></li> 
+                                <li class="text-sm leading-loose"><router-link to="/about" class="text-black">Loaders & Animations</router-link></li> 
+                                <li class="text-sm leading-loose"><router-link to="/about" class="text-black">Wallpapers</router-link></li> 
                             </ul>
                         </section>
                     </aside>
