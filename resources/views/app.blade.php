@@ -8,6 +8,7 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
         <link rel="stylesheet" href="/css/app.css">
     </head>
+
     <body class="font-sans">
         <div id="app">
             <div class="container mx-auto">
@@ -23,10 +24,10 @@
                             <h5 class="uppercase font-bold mb-3">The Brand</h5>
                             
                             <ul class="list-reset">
-                                <li class="text-sm leading-loose"><router-link to="/" class="text-black">Logo</router-link></li>
-                                <li class="text-sm leading-loose"><router-link to="/about" class="text-black">Logo Symbol</router-link></li> 
-                                <li class="text-sm leading-loose"><router-link to="/about" class="text-black">Colors</router-link></li> 
-                                <li class="text-sm leading-loose"><router-link to="/about" class="text-black">Typography</router-link></li> 
+                                <li class="text-sm leading-loose"><router-link to="/" class="text-black" exact>Logo</router-link></li>
+                                <li class="text-sm leading-loose"><router-link to="/logo-symbol" class="text-black">Logo Symbol</router-link></li> 
+                                <li class="text-sm leading-loose"><router-link to="/colors" class="text-black">Colors</router-link></li> 
+                                <li class="text-sm leading-loose"><router-link to="/typography" class="text-black">Typography</router-link></li> 
                                 {{-- <router-link :to="{ name: 'about' }">About</router-link> --}}
                             </ul>
                         </section>
@@ -34,10 +35,10 @@
                             <h5 class="uppercase font-bold mb-3">Doodles</h5>
 
                             <ul class="list-reset">
-                                <li class="text-sm leading-loose"><router-link to="/" class="text-black">Mascot</router-link></li>
-                                <li class="text-sm leading-loose"><router-link to="/about" class="text-black">Illustrations</router-link></li> 
-                                <li class="text-sm leading-loose"><router-link to="/about" class="text-black">Loaders & Animations</router-link></li> 
-                                <li class="text-sm leading-loose"><router-link to="/about" class="text-black">Wallpapers</router-link></li> 
+                                <li class="text-sm leading-loose"><router-link to="/mascot" class="text-black">Mascot</router-link></li>
+                                <li class="text-sm leading-loose"><router-link to="/illustrations" class="text-black">Illustrations</router-link></li> 
+                                <li class="text-sm leading-loose"><router-link to="/loaders-and-animations" class="text-black">Loaders & Animations</router-link></li> 
+                                <li class="text-sm leading-loose"><router-link to="/wallpapers" class="text-black">Wallpapers</router-link></li> 
                             </ul>
                         </section>
                     </aside>
