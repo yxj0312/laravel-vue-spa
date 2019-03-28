@@ -17,4 +17,4 @@
 // {any?} response to anything or nothing
 Route::get('/{any?}', function () {
     return view('app');
-});
+})->where('any', '.*');
