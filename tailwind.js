@@ -49,7 +49,7 @@ let colors = {
   'black': '#222222',
   'grey-darkest': '#4a4a4a',
   'grey-darker': '#606f7b',
-  'grey-dark': '#8795a1',
+  'grey-dark': '#78909c',
   'grey': '#b8c2cc',
   'grey-light': '#dedede',
   'grey-lighter': '#f1f5f8',
@@ -253,6 +253,7 @@ module.exports = {
   */
 
   textSizes: {
+    '2xs': '.625rem',   // 10px
     'xs': '.75rem',     // 12px
     'sm': '.875rem',    // 14px
     'base': '1rem',     // 16px
@@ -493,6 +494,7 @@ module.exports = {
     '10': '2.5rem',
     '12': '3rem',
     '16': '4rem',
+    '18': '4.5rem',
     '24': '6rem',
     '32': '8rem',
     '48': '12rem',
@@ -542,6 +544,7 @@ module.exports = {
     '10': '2.5rem',
     '12': '3rem',
     '16': '4rem',
+    '18': '4.5rem',
     '24': '6rem',
     '32': '8rem',
     '48': '12rem',
