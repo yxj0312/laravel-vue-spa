@@ -101,6 +101,85 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -868,13 +947,79 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "h1",
-    { staticClass: "font-normal text-3xl text-grey-darkest leading-none" },
-    [_vm._v("\n    Colors\n")]
-  )
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "h1",
+        {
+          staticClass:
+            "font-normal text-3xl text-grey-darkest leading-none mb-6"
+        },
+        [_vm._v("\n        Colors\n    ")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-16" }, [
+        _c("p", { staticClass: "mb-8" }, [
+          _vm._v("Primary - Blue, White, Dark Grey")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex" }, [
+          _c("div", { staticClass: "text-center mr-8" }, [
+            _c("div", {
+              staticClass: "rounded-full bg-blue shadow w-18 h-18 mb-3"
+            }),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-xs" }, [_vm._v("#328AF1")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-center mr-8" }, [
+            _c("div", {
+              staticClass: "rounded-full bg-white shadow w-18 h-18 mb-3"
+            }),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-xs" }, [_vm._v("#FFF")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-center" }, [
+            _c("div", {
+              staticClass: "rounded-full bg-black shadow w-18 h-18 mb-3"
+            }),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-xs" }, [_vm._v("#222222")])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-16" }, [
+        _c("p", { staticClass: "mb-8" }, [
+          _vm._v("Secondary - Category Colors & Accents")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex" }),
+        _vm._v(" "),
+        _c("div", [
+          _c("p", { staticClass: "mb-8" }, [_vm._v("Icons")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex" }, [
+            _c("div", { staticClass: "text-center mr-8" }, [
+              _c("div", {
+                staticClass: "rounded-full shadow w-18 h-18 mb-3 bg-grey-dark"
+              }),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-xs" }, [_vm._v("#78909C")])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

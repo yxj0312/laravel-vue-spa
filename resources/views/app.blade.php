@@ -44,7 +44,7 @@
                             </div>
                         </aside>
 
-                        <div class="primary flex-1X">
+                        <div class="primary flex-1">
                             <router-view></router-view>
                         </div>
                     </main>
