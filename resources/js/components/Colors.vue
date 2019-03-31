@@ -31,12 +31,11 @@
             </div>
         </div>
 
-
         <div class="mb-16">
             <p class="mb-8">Secondary - Category Colors & Accents</p>
 
             <div class="flex">
-                <!-- <color-range
+                <color-range
                     from="#EC454F"
                     to="#F44881"
                     name="Laravel"
@@ -64,19 +63,19 @@
                     from="#8465E5"
                     to="#AA76B9"
                     name="Tooling"
-                ></color-range> -->
+                ></color-range>
             </div>
+        </div>
 
-            <div>
-                <p class="mb-8">Icons</p>
+        <div>
+            <p class="mb-8">Icons</p>
 
-                <div class="flex">
-                    <div class="text-center mr-8">
-                        <div
-                            class="rounded-full shadow w-18 h-18 mb-3 bg-grey-dark"
-                        ></div>
-                        <p class="text-xs">#78909C</p>
-                    </div>
+            <div class="flex">
+                <div class="text-center mr-8">
+                    <div
+                        class="rounded-full shadow w-18 h-18 mb-3 bg-grey-dark"
+                    ></div>
+                    <p class="text-xs">#78909C</p>
                 </div>
             </div>
         </div>
@@ -84,5 +83,10 @@
 </template>
 
 <script>
-    export default {}
+import ColorRange from './ColorRange';
+export default {
+    components: {
+        ColorRange
+    }
+};
 </script>
