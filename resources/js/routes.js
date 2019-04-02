@@ -4,7 +4,6 @@ import Colors from './components/Colors';
 import Typography from './components/Typography';
 import Mascot from './components/Mascot';
 import Illustrations from './components/Illustrations';
-// import LoadersAndAnimations from './components/LoadersAndAnimations';
 import Wallpapers from './components/Wallpapers';
 import NotFound from './components/NotFound';
 
