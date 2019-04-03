@@ -35,11 +35,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -98,12 +93,8 @@ var render = function() {
     _vm._v(" "),
     _c(
       "a",
-      {
-        staticClass:
-          "border border-grey-light px-10 py-2 rounded-full text-black font-bold text-xs",
-        attrs: { href: "/images/logo.svg" }
-      },
-      [_vm._v("spinner.zip\n    ")]
+      { staticClass: "button", attrs: { href: "/laracasts-spinner.zip" } },
+      [_vm._v("spinner.zip")]
     )
   ])
 }
