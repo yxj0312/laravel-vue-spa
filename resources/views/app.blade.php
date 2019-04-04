@@ -32,7 +32,7 @@
                                 </ul>
                             </div>
 
-                            <div>
+                            <div class="mb-10">
                                 <h5 class="uppercase font-bold mb-5 text-base">Doodles</h5>
 
                                 <ul class="list-reset">
@@ -40,6 +40,14 @@
                                     <li class="text-sm leading-loose"><router-link to="/illustrations" class="text-black">Illustrations</router-link></li> 
                                     <li class="text-sm leading-loose"><router-link to="/loaders-and-animations" class="text-black">Loaders & Animations</router-link></li> 
                                     <li class="text-sm leading-loose"><router-link to="/wallpapers" class="text-black">Wallpapers</router-link></li> 
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5 class="uppercase font-bold mb-5 text-base">Stats</h5>
+
+                                <ul class="list-reset">
+                                    <li class="text-sm leading-loose"><router-link to="/site-stats" class="text-black">Site Stats</router-link></li>
                                 </ul>
                             </div>
                         </aside>
