@@ -43,11 +43,20 @@
                                 </ul>
                             </div>
 
-                            <div>
+                            <div class="mb-10">
                                 <h5 class="uppercase font-bold mb-5 text-base">Stats</h5>
 
                                 <ul class="list-reset">
                                     <li class="text-sm leading-loose"><router-link to="/site-stats" class="text-black">Site Stats</router-link></li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5 class="uppercase font-bold mb-5 text-base">About laracasts</h5>
+
+                                <ul class="list-reset">
+                                    <li class="text-sm leading-loose"><router-link to="/myteam" class="text-black">The Team</router-link></li>
+                                    <li class="text-sm leading-loose"><router-link to="/achievements" class="text-black">Your Achievements</router-link></li>
                                 </ul>
                             </div>
                         </aside>

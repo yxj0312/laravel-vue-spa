@@ -7,6 +7,7 @@ import Illustrations from './components/Illustrations';
 import Wallpapers from './components/Wallpapers';
 import SiteStats from './components/SiteStats';
 import NotFound from './components/NotFound';
+import Achievements from './components/Achievements';
 
 let LoadersAndAnimations = () =>
     import(/* webpackChunkName: "loaders-and-animations.bundle" */ './components/LoadersAndAnimations');
@@ -66,6 +67,11 @@ export default {
         {
             path: '/site-stats',
             component: SiteStats
+        },
+
+        {
+            path: '/achievements',
+            component: Achievements
         }
     ]
 }
