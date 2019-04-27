@@ -28,6 +28,13 @@
             }
         },
 
+        created() {
+            axios.get('http://birdboard.loc/api/stats')
+                .then(response => {
+                    this.achievements = response.data;
+                })
+        },
+
         computed: {
             
         },

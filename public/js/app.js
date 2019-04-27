@@ -1901,6 +1901,13 @@ __webpack_require__.r(__webpack_exports__);
       achievements: []
     };
   },
+  created: function created() {
+    var _this = this;
+
+    axios.get('http://birdboard.loc/api/stats').then(function (response) {
+      _this.achievements = response.data;
+    });
+  },
   computed: {},
   methods: {}
 });
