@@ -1893,23 +1893,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   components: {},
   data: function data() {
     return {
-      achievements: []
+      achievements: [],
+      token: '',
+      message: ''
     };
   },
-  created: function created() {
-    var _this = this;
-
-    axios.get('http://birdboard.loc/api/stats').then(function (response) {
-      _this.achievements = response.data;
-    });
-  },
   computed: {},
-  methods: {}
+  methods: {
+    fetchAchievements: function fetchAchievements() {
+      var _this = this;
+
+      axios.get( // 'http://birdboard.loc/api/achievements?api_token=nog2q5Dg7bDpkEZG3cfIPW3YNpELQvHMrYyPhGMYrOgxUl3cSnpQJJO2LceB'
+      "http://birdboard.loc/api/achievements?api_token=".concat(this.token)).catch(function (error) {
+        _this.message = error.response.data.message;
+        _this.achievements = [];
+      }).then(function (_ref) {
+        var data = _ref.data;
+        _this.achievements = data;
+        _this.message = null;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -3330,6 +3350,52 @@ var render = function() {
       },
       [_vm._v("\n        Your Achievements\n    ")]
     ),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.token,
+          expression: "token"
+        }
+      ],
+      staticClass: "border p-2 rounded w-full mb-8",
+      attrs: { placeholder: "Your Laracast API token" },
+      domProps: { value: _vm.token },
+      on: {
+        keyup: function($event) {
+          if (
+            !$event.type.indexOf("key") &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.fetchAchievements($event)
+        },
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.token = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("p", { staticClass: "text-xs mb-1" }, [
+      _vm._v("nog2q5Dg7bDpkEZG3cfIPW3YNpELQvHMrYyPhGMYrOgxUl3cSnpQJJO2LceB")
+    ]),
+    _vm._v(" "),
+    _c("p", { staticClass: "text-xs mb-8" }, [
+      _vm._v("eynT09Fd4MDxZZ2Q7joWX9StdbqSs6WuxlcC3vMG0SC5yUxpphgGQUMozIE8")
+    ]),
+    _vm._v(" "),
+    _vm.message
+      ? _c("p", {
+          staticClass: "text-red italic text-sm",
+          domProps: { textContent: _vm._s(_vm.message) }
+        })
+      : _vm._e(),
     _vm._v(" "),
     _c(
       "ul",
