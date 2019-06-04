@@ -8,6 +8,7 @@ import Wallpapers from './components/Wallpapers';
 import SiteStats from './components/SiteStats';
 import NotFound from './components/NotFound';
 import Achievements from './components/Achievements';
+import Ep1 from './components/practical_vue_components/Ep1';
 
 let LoadersAndAnimations = () =>
     import(/* webpackChunkName: "loaders-and-animations.bundle" */ './components/LoadersAndAnimations');
@@ -72,6 +73,11 @@ export default {
         {
             path: '/achievements',
             component: Achievements
+        },
+
+        {
+            path: '/practical_vue_components/ep1',
+            component: Ep1
         }
     ]
 }

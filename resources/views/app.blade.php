@@ -51,12 +51,22 @@
                                 </ul>
                             </div>
 
-                            <div>
+                            <div class="mb-10">
                                 <h5 class="uppercase font-bold mb-5 text-base">About laracasts</h5>
 
                                 <ul class="list-reset">
                                     <li class="text-sm leading-loose"><router-link to="/myteam" class="text-black">The Team</router-link></li>
                                     <li class="text-sm leading-loose"><router-link to="/achievements" class="text-black">Your Achievements</router-link></li>
+                                </ul>
+                            </div>
+
+
+                            <div>
+                                <h5 class="uppercase font-bold mb-5 text-base">Practical Vue Components</h5>
+
+                                <ul class="list-reset">
+                                    <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep1" class="text-black">Ep1: Smooth Scrolling</router-link></li>
+                                    {{-- <li class="text-sm leading-loose"><router-link to="/achievements" class="text-black">Your Achievements</router-link></li> --}}
                                 </ul>
                             </div>
                         </aside>
