@@ -66,7 +66,7 @@
 
                                 <ul class="list-reset">
                                     <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep1" class="text-black">Ep1: Smooth Scrolling</router-link></li>
-                                    {{-- <li class="text-sm leading-loose"><router-link to="/achievements" class="text-black">Your Achievements</router-link></li> --}}
+                                    <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep2" class="text-black">Ep2: Context Menus</router-link></li>
                                 </ul>
                             </div>
                         </aside>
