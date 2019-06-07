@@ -11,11 +11,24 @@
                         </button>
                     </template>
 
-                    <li><a href="#" class="pl-2 pr-8 text-xs block hover:bg-grey-darker">Edit</a></li>
-                    <li><a href="#" class="pl-2 pr-8 text-xs block hover:bg-grey-darker">Delete</a></li>
-                    <li><a href="#" class="pl-2 pr-8 text-xs block hover:bg-grey-darker">Report</a></li>
+                    <li class="text-sm leading-loose"><a href="#" class="pl-2 pr-8 text-xs block hover:bg-grey-darker text-white">Edit</a></li>
+                    <li class="text-sm leading-loose"><a href="#" class="pl-2 pr-8 text-xs block hover:bg-grey-darker text-white">Delete</a></li>
+                    <li class="text-sm leading-loose"><a href="#" class="pl-2 pr-8 text-xs block hover:bg-grey-darker text-white">Report</a></li>
                 </dropdown>
             </div>
+
+            <hr>
+
+            <!-- Example 2 -->
+            <dropdown classes="w-full">
+                <template v-slot:trigger>
+                    <button class="text-blue-darker">Example With Full Width Menu</button>
+                </template>
+
+                <li><a href="#" class="pl-2 pr-8 leading-loose text-xs block hover:bg-grey-darker text-white">Edit</a></li>
+                <li><a href="#" class="pl-2 pr-8 leading-loose text-xs block hover:bg-grey-darker text-white">Delete</a></li>
+                <li><a href="#" class="pl-2 pr-8 leading-loose text-xs block hover:bg-grey-darker text-white">Report</a></li>
+            </dropdown>
         </div>
     </div>
 </template>
