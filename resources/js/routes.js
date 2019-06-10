@@ -11,6 +11,7 @@ import Achievements from './components/Achievements';
 import Ep1 from './components/practical_vue_components/Ep1';
 import Ep2 from './components/practical_vue_components/Ep2';
 import Ep3 from './components/practical_vue_components/Ep3';
+import Ep4 from './components/practical_vue_components/Ep4';
 
 let LoadersAndAnimations = () =>
     import(/* webpackChunkName: "loaders-and-animations.bundle" */ './components/LoadersAndAnimations');
@@ -90,6 +91,11 @@ export default {
         {
             path: '/practical_vue_components/ep3',
             component: Ep3
+        },
+
+        {
+            path: '/practical_vue_components/ep4',
+            component: Ep4
         },
     ]
 }
