@@ -19,10 +19,13 @@
 </template>
 
 <script>
+    import modal from './_Modal'
     export default {
         props: [],
 
-        components: {},
+        components: {
+            modal
+        },
 
         data() {
             return {
