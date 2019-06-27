@@ -4,6 +4,12 @@
 
         <p>
             <a href="#cancel-modal">Open Modal</a>
+            
+        </p>
+        <p>
+            Our next practical Vue component is, of course, the ubiquitous modal. In this episode, 
+            we'll migrate and enhance the code from <a href="https://laracasts.com/series/modern-css-for-backend-developers/episodes/17">the CSS-only modals lesson</a>. 
+            Once working, we'll then learn how to extract the code to a custom Vue plugin.
         </p>
 
         <modal name="cancel-modal">
@@ -13,6 +19,17 @@
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus quas sapiente blanditiis nihil amet vero, 
                 ex enim at qui cum molestias eveniet? Facilis nihil accusamus magni? Doloribus voluptas unde ullam.
             </p>
+
+            <template v-slot:footer>
+                 <button
+                    @click="$modal.hide('cancel-modal')"
+                    class="bg-gray-500 py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2"
+                >Cancel</button>
+                <a
+                    href="#confirm-cancel-modal"
+                    class="bg-blue-500 py-2 px-4 rounded-lg text-white hover:bg-blue-600"
+                >Confirm Cancellation</a>
+            </template>
         </modal>
     </div>
 

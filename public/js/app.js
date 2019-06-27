@@ -3007,6 +3007,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -7032,15 +7049,56 @@ var render = function() {
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
-      _c("modal", { attrs: { name: "cancel-modal" } }, [
-        _c("h1", [_vm._v("Leaving So Soon?")]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "\n            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus quas sapiente blanditiis nihil amet vero, \n            ex enim at qui cum molestias eveniet? Facilis nihil accusamus magni? Doloribus voluptas unde ullam.\n        "
-          )
-        ])
-      ])
+      _vm._m(1),
+      _vm._v(" "),
+      _c(
+        "modal",
+        {
+          attrs: { name: "cancel-modal" },
+          scopedSlots: _vm._u([
+            {
+              key: "footer",
+              fn: function() {
+                return [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "bg-gray-500 py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2",
+                      on: {
+                        click: function($event) {
+                          return _vm.$modal.hide("cancel-modal")
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "bg-blue-500 py-2 px-4 rounded-lg text-white hover:bg-blue-600",
+                      attrs: { href: "#confirm-cancel-modal" }
+                    },
+                    [_vm._v("Confirm Cancellation")]
+                  )
+                ]
+              },
+              proxy: true
+            }
+          ])
+        },
+        [
+          _c("h1", [_vm._v("Leaving So Soon?")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus quas sapiente blanditiis nihil amet vero, \n            ex enim at qui cum molestias eveniet? Facilis nihil accusamus magni? Doloribus voluptas unde ullam.\n        "
+            )
+          ])
+        ]
+      )
     ],
     1
   )
@@ -7052,6 +7110,29 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", [
       _c("a", { attrs: { href: "#cancel-modal" } }, [_vm._v("Open Modal")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _vm._v(
+        "\n        Our next practical Vue component is, of course, the ubiquitous modal. In this episode, \n        we'll migrate and enhance the code from "
+      ),
+      _c(
+        "a",
+        {
+          attrs: {
+            href:
+              "https://laracasts.com/series/modern-css-for-backend-developers/episodes/17"
+          }
+        },
+        [_vm._v("the CSS-only modals lesson")]
+      ),
+      _vm._v(
+        ". \n        Once working, we'll then learn how to extract the code to a custom Vue plugin.\n    "
+      )
     ])
   }
 ]
