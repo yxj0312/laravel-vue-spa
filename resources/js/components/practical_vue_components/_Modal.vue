@@ -52,6 +52,7 @@
         opacity: 0;
     }
 
+    /* if this element matchs what you have in the url as the #, then it is the target */
     .overlay:target {
         visibility: visible;
         opacity: 1;
