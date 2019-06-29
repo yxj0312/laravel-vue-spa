@@ -7,7 +7,7 @@
 
             <footer class="flex mt-8">
                 <slot name="footer" v-if="hasFooterSlot">
-                    123
+                <!-- <slot name="footer" foo="sadf" v-if="hasFooterSlot"> -->
                 </slot>
             </footer>
 

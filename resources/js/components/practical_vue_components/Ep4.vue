@@ -21,9 +21,10 @@
             </p>
 
             <template v-slot:footer>
+            <!-- <template v-slot:footer="{foo}"> -->
                 <button
                     @click="$modal.hide('cancel-modal')"
-                    class="bg-gray-500 py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2"
+                    class="bg-grey-500 py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2"
                 >
                     Cancel
                 </button>

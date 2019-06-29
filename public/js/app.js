@@ -3026,6 +3026,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -7072,7 +7073,7 @@ var render = function() {
                     "button",
                     {
                       staticClass:
-                        "bg-gray-500 py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2",
+                        "bg-grey-500 py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2",
                       on: {
                         click: function($event) {
                           return _vm.$modal.hide("cancel-modal")
@@ -7285,13 +7286,7 @@ var render = function() {
           _c(
             "footer",
             { staticClass: "flex mt-8" },
-            [
-              _vm.hasFooterSlot
-                ? _vm._t("footer", [
-                    _vm._v("\n                123\n            ")
-                  ])
-                : _vm._e()
-            ],
+            [_vm.hasFooterSlot ? _vm._t("footer") : _vm._e()],
             2
           ),
           _vm._v(" "),
