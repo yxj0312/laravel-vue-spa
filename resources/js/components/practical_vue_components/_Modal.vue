@@ -6,7 +6,9 @@
             <slot></slot>
 
             <footer class="flex mt-8">
-                <slot name="footer"></slot>
+                <slot name="footer" v-if="hasFooterSlot">
+                    123
+                </slot>
             </footer>
 
             <a href="#" class="close">&times;</a>
@@ -27,7 +29,9 @@
         },
 
         computed: {
-            
+            hasFooterSlot() {
+                return !!this.$slots.footer
+            }
         },
 
         methods: {

@@ -3024,6 +3024,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -3155,13 +3157,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['name'],
   components: {},
   data: function data() {
     return {};
   },
-  computed: {},
+  computed: {
+    hasFooterSlot: function hasFooterSlot() {
+      return !!this.$slots.footer;
+    }
+  },
   methods: {}
 });
 
@@ -7071,7 +7079,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Cancel")]
+                    [_vm._v("\n                Cancel\n            ")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -7274,7 +7282,18 @@ var render = function() {
         [
           _vm._t("default"),
           _vm._v(" "),
-          _c("footer", { staticClass: "flex mt-8" }, [_vm._t("footer")], 2),
+          _c(
+            "footer",
+            { staticClass: "flex mt-8" },
+            [
+              _vm.hasFooterSlot
+                ? _vm._t("footer", [
+                    _vm._v("\n                123\n            ")
+                  ])
+                : _vm._e()
+            ],
+            2
+          ),
           _vm._v(" "),
           _c("a", { staticClass: "close", attrs: { href: "#" } }, [_vm._v("×")])
         ],
