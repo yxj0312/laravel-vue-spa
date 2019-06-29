@@ -3027,6 +3027,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -7073,12 +7098,7 @@ var render = function() {
                     "button",
                     {
                       staticClass:
-                        "bg-grey-500 py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2",
-                      on: {
-                        click: function($event) {
-                          return _vm.$modal.hide("cancel-modal")
-                        }
-                      }
+                        "bg-grey py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2"
                     },
                     [_vm._v("\n                Cancel\n            ")]
                   ),
@@ -7087,7 +7107,7 @@ var render = function() {
                     "a",
                     {
                       staticClass:
-                        "bg-blue-500 py-2 px-4 rounded-lg text-white hover:bg-blue-600",
+                        "bg-blue py-2 px-4 rounded-lg text-white hover:bg-blue-600",
                       attrs: { href: "#confirm-cancel-modal" }
                     },
                     [_vm._v("Confirm Cancellation")]
@@ -7100,6 +7120,50 @@ var render = function() {
         },
         [
           _c("h1", [_vm._v("Leaving So Soon?")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus quas sapiente blanditiis nihil amet vero, \n            ex enim at qui cum molestias eveniet? Facilis nihil accusamus magni? Doloribus voluptas unde ullam.\n        "
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "modal",
+        {
+          attrs: { name: "confirm-cancel-modal" },
+          scopedSlots: _vm._u([
+            {
+              key: "footer",
+              fn: function() {
+                return [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "bg-grey py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2"
+                    },
+                    [_vm._v("\n                Cancel\n            ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "bg-blue py-2 px-4 rounded-lg text-white hover:bg-blue-600",
+                      attrs: { href: "#confirm-cancel-modal" }
+                    },
+                    [_vm._v("Yes")]
+                  )
+                ]
+              },
+              proxy: true
+            }
+          ])
+        },
+        [
+          _c("h1", [_vm._v("You're 100% Sure?")]),
           _vm._v(" "),
           _c("p", [
             _vm._v(

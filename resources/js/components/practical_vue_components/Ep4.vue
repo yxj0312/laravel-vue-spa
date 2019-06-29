@@ -22,16 +22,41 @@
 
             <template v-slot:footer>
             <!-- <template v-slot:footer="{foo}"> -->
-                <button
+                <!-- <button
                     @click="$modal.hide('cancel-modal')"
                     class="bg-grey-500 py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2"
+                > -->
+                <button
+                    class="bg-grey py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2"
                 >
                     Cancel
                 </button>
                 <a
                     href="#confirm-cancel-modal"
-                    class="bg-blue-500 py-2 px-4 rounded-lg text-white hover:bg-blue-600"
+                    class="bg-blue py-2 px-4 rounded-lg text-white hover:bg-blue-600"
                 >Confirm Cancellation</a>
+            </template>
+        </modal>
+
+        <modal name="confirm-cancel-modal">
+            <h1>You're 100% Sure?</h1>
+
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus quas sapiente blanditiis nihil amet vero, 
+                ex enim at qui cum molestias eveniet? Facilis nihil accusamus magni? Doloribus voluptas unde ullam.
+            </p>
+
+            <template v-slot:footer>
+            <!-- <template v-slot:footer="{foo}"> -->
+                <button
+                    class="bg-grey py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2"
+                >
+                    Cancel
+                </button>
+                <a
+                    href="#confirm-cancel-modal"
+                    class="bg-blue py-2 px-4 rounded-lg text-white hover:bg-blue-600"
+                >Yes</a>
             </template>
         </modal>
     </div>
