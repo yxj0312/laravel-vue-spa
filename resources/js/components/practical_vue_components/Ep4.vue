@@ -27,6 +27,7 @@
                     class="bg-grey-500 py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2"
                 > -->
                 <button
+                    @click="$modal.hide('cancel-modal')"
                     class="bg-grey py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2"
                 >
                     Cancel
@@ -48,15 +49,14 @@
 
             <template v-slot:footer>
             <!-- <template v-slot:footer="{foo}"> -->
-                <button
+               <!-- <a href="#" class="bg-grey py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2">Cancel</a> -->
+               <button
+                    @click="$modal.hide('cancel-modal')"
                     class="bg-grey py-2 px-4 rounded-lg text-white hover:bg-gray-600 mr-2"
                 >
                     Cancel
                 </button>
-                <a
-                    href="#confirm-cancel-modal"
-                    class="bg-blue py-2 px-4 rounded-lg text-white hover:bg-blue-600"
-                >Yes</a>
+                <a href="#" class="bg-blue py-2 px-4 rounded-lg text-white hover:bg-blue-600">Yes</a>
             </template>
         </modal>
     </div>
@@ -64,12 +64,12 @@
 </template>
 
 <script>
-    import modal from './_Modal'
+    // import modal from './_Modal'
     export default {
         props: [],
 
         components: {
-            modal
+            // modal
         },
 
         data() {
