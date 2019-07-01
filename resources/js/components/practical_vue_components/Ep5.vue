@@ -4,6 +4,7 @@
             Confirmation Dialogs
         </h1>
 
+        <confirm-dialog></confirm-dialog>
         <div class="mb-6">
             <form method="POST">
                 
@@ -13,10 +14,13 @@
 </template>
 
 <script>
+    import confirmDialog from './_ConfirmDialog';
     export default {
         props: [],
 
-        components: {},
+        components: {
+            confirmDialog
+        },
 
         data() {
             return {
