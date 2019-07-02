@@ -3094,7 +3094,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   components: {
-    confirmDialog: _ConfirmDialog__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ConfirmDialog: _ConfirmDialog__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {};
@@ -3118,6 +3118,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   components: {},
@@ -3125,7 +3134,13 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {
+    handleClick: function handleClick(confirmed) {
+      // emit an event
+      this.$emit('clicked', confirmed);
+      this.$model.hide();
+    }
+  }
 });
 
 /***/ }),
@@ -7314,7 +7329,54 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("123")])
+  return _c(
+    "modal",
+    {
+      attrs: { name: "dialog" },
+      scopedSlots: _vm._u([
+        {
+          key: "footer",
+          fn: function() {
+            return [
+              _c("div", [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "bg-grey hover:bg-grey-darker py-2 px-4 text-white rounded-lg mr-2",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.handleClick(false)
+                      }
+                    }
+                  },
+                  [_vm._v("Cancel")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "bg-blue hover:bg-blue-darker py-2 px-4 text-white rounded-lg mr-2",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.handleClick(true)
+                      }
+                    }
+                  },
+                  [_vm._v("Continue")]
+                )
+              ])
+            ]
+          },
+          proxy: true
+        }
+      ])
+    },
+    [_vm._v("\n    Are you sure?\n\n    ")]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

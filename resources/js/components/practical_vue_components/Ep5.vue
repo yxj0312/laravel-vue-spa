@@ -14,12 +14,12 @@
 </template>
 
 <script>
-    import confirmDialog from './_ConfirmDialog';
+    import ConfirmDialog from './_ConfirmDialog';
     export default {
         props: [],
 
         components: {
-            confirmDialog
+            ConfirmDialog
         },
 
         data() {
