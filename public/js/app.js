@@ -3114,6 +3114,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _plugins_modal_ModalPlugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../plugins/modal/ModalPlugin */ "./resources/js/plugins/modal/ModalPlugin.js");
 //
 //
 //
@@ -3127,13 +3128,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   components: {},
   data: function data() {
-    return {};
+    return {
+      message: 'Are you sure?'
+    };
   },
   computed: {},
+  beforeMount: function beforeMount() {
+    var _this = this;
+
+    // listen for that event
+    // fetch the params
+    // and assign it to the data object
+    _plugins_modal_ModalPlugin__WEBPACK_IMPORTED_MODULE_0__["default"].events.$on('show', function (params) {
+      _this.message = params.message;
+    });
+  },
   methods: {
     handleClick: function handleClick(confirmed) {
       // emit an event
@@ -7375,7 +7389,7 @@ var render = function() {
         }
       ])
     },
-    [_vm._v("\n    Are you sure?\n\n    ")]
+    [_vm._v("\n     " + _vm._s(_vm.message) + "\n\n    ")]
   )
 }
 var staticRenderFns = []
@@ -23859,13 +23873,24 @@ __webpack_require__.r(__webpack_exports__);
 var Plugin = {
   install: function install(Vue) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    Vue.component('modal', _Component__WEBPACK_IMPORTED_MODULE_0__["default"]);
+    Vue.component('modal', _Component__WEBPACK_IMPORTED_MODULE_0__["default"]); // Vue() includes an $emit method, that means a new instance of vue is an event dispatch
+
+    Plugin.events = new Vue();
     Vue.prototype.$modal = {
       show: function show(name) {
-        location.hash = name;
+        var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+        location.hash = name; // fire an event on the plugin and include the params
+
+        Plugin.events.$emit('show', params);
       },
       hide: function hide(name) {
         location.hash = '#';
+      },
+      dialog: function dialog(message) {
+        // this.$modal.dialog('Hello there')
+        this.show('dialog', {
+          message: message
+        });
       }
     };
   }

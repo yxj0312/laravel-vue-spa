@@ -15,6 +15,7 @@
 
 <script>
     import ConfirmDialog from './_ConfirmDialog';
+    
     export default {
         props: [],
 

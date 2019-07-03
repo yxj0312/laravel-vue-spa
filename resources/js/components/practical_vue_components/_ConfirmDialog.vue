@@ -1,6 +1,6 @@
 <template>
     <modal name="dialog">
-        Are you sure?
+         {{ message }}
 
         <template v-slot:footer>
             <div>
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+    import Modal from '../../plugins/modal/ModalPlugin';
+
     export default {
         props: [],
 
@@ -19,12 +21,21 @@
 
         data() {
             return {
-                
+               message: 'Are you sure?' 
             }
         },
 
         computed: {
             
+        },
+
+        beforeMount() {
+            // listen for that event
+            // fetch the params
+            // and assign it to the data object
+            Modal.events.$on('show', params => {
+                this.message = params.message;
+            }); 
         },
 
         methods: {
