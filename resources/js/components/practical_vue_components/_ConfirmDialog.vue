@@ -41,7 +41,7 @@
         methods: {
             handleClick(confirmed) {
                 // emit an event
-                this.$emit('clicked', confirmed);
+                Modal.events.$emit('clicked', confirmed);
 
                 this.$model.hide();
             }

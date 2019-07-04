@@ -3151,7 +3151,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     handleClick: function handleClick(confirmed) {
       // emit an event
-      this.$emit('clicked', confirmed);
+      _plugins_modal_ModalPlugin__WEBPACK_IMPORTED_MODULE_0__["default"].events.$emit('clicked', confirmed);
       this.$model.hide();
     }
   }
@@ -23887,9 +23887,18 @@ var Plugin = {
         location.hash = '#';
       },
       dialog: function dialog(message) {
+        var _this = this;
+
         // this.$modal.dialog('Hello there')
-        this.show('dialog', {
-          message: message
+        return new Promise(function (resolve, reject) {
+          _this.show('dialog', {
+            message: message
+          });
+
+          Plugin.events.$on('clicked', function (confirmed) {
+            resolve(confirmed);
+            console.log(confirmed);
+          });
         });
       }
     };

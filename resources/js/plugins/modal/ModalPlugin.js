@@ -21,7 +21,14 @@ let Plugin = {
 
             dialog(message) {
                 // this.$modal.dialog('Hello there')
-                this.show('dialog', { message });
+                return new Promise((resolve, reject) => {
+                    this.show('dialog', { message });
+                    
+                    Plugin.events.$on('clicked', confirmed => {
+                        resolve(confirmed);
+                        console.log(confirmed);
+                    });
+                });
             }
         }
     }
