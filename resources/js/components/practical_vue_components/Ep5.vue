@@ -7,7 +7,7 @@
         <confirm-dialog></confirm-dialog>
         <div class="mb-6">
             <form method="POST">
-                
+                <confirm-button>Submit</confirm-button>
             </form>
         </div>
     </div>
@@ -15,6 +15,7 @@
 
 <script>
     import ConfirmDialog from './_ConfirmDialog';
+    import ConfirmButton from './_ConfirmButton';
     
     export default {
         props: [],
