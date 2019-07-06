@@ -3096,7 +3096,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   components: {
-    ConfirmDialog: _ConfirmDialog__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ConfirmDialog: _ConfirmDialog__WEBPACK_IMPORTED_MODULE_0__["default"],
+    ConfirmButton: _ConfirmButton__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {};
@@ -3123,13 +3124,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: [],
-  components: {},
-  data: function data() {
-    return {};
+  props: {
+    message: {},
+    confirmButton: {
+      default: 'Continue'
+    },
+    cancelButton: {
+      default: 'Cancel'
+    }
   },
-  computed: {},
-  methods: {}
+  data: function data() {
+    return {
+      confirmed: false
+    };
+  },
+  methods: {
+    confirm: function confirm(e) {
+      var _this = this;
+
+      if (this.confirmed) {
+        return;
+      }
+
+      e.preventDefault();
+      this.$modal.dialog(this._props).then(function (confirmed) {
+        _this.confirmed = confirmed;
+
+        if (confirmed) {
+          _this.$el.click();
+        }
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -3157,31 +3183,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: [],
-  components: {},
   data: function data() {
     return {
-      message: 'Are you sure?'
+      params: {
+        message: 'Are you sure?',
+        confirmButton: 'Continue',
+        cancelButton: 'Cancel'
+      }
     };
   },
-  computed: {},
   beforeMount: function beforeMount() {
     var _this = this;
 
-    // listen for that event
-    // fetch the params
-    // and assign it to the data object
     _plugins_modal_ModalPlugin__WEBPACK_IMPORTED_MODULE_0__["default"].events.$on('show', function (params) {
-      _this.message = params.message;
+      Object.assign(_this.params, params);
     });
   },
   methods: {
     handleClick: function handleClick(confirmed) {
-      // emit an event
       _plugins_modal_ModalPlugin__WEBPACK_IMPORTED_MODULE_0__["default"].events.$emit('clicked', confirmed);
-      this.$model.hide();
+      this.$modal.hide();
     }
   }
 });
@@ -7370,7 +7404,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("button", [_vm._t("default")], 2)
+  return _c("button", { on: { click: _vm.confirm } }, [_vm._t("default")], 2)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -7403,44 +7437,40 @@ var render = function() {
           key: "footer",
           fn: function() {
             return [
-              _c("div", [
-                _c(
-                  "button",
-                  {
+              _vm.params.cancelButton
+                ? _c("button", {
                     staticClass:
-                      "bg-grey hover:bg-grey-darker py-2 px-4 text-white rounded-lg mr-2",
+                      "bg-gray-500 hover:bg-gray-600 py-2 px-4 text-white rounded-lg mr-2",
+                    domProps: { textContent: _vm._s(_vm.params.cancelButton) },
                     on: {
                       click: function($event) {
                         $event.preventDefault()
                         return _vm.handleClick(false)
                       }
                     }
-                  },
-                  [_vm._v("Cancel")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.params.confirmButton
+                ? _c("button", {
                     staticClass:
-                      "bg-blue hover:bg-blue-darker py-2 px-4 text-white rounded-lg mr-2",
+                      "bg-blue-500 hover:bg-blue-600 py-2 px-4 text-white rounded-lg",
+                    domProps: { textContent: _vm._s(_vm.params.confirmButton) },
                     on: {
                       click: function($event) {
                         $event.preventDefault()
                         return _vm.handleClick(true)
                       }
                     }
-                  },
-                  [_vm._v("Continue")]
-                )
-              ])
+                  })
+                : _vm._e()
             ]
           },
           proxy: true
         }
       ])
     },
-    [_vm._v("\n     " + _vm._s(_vm.message) + "\n\n    ")]
+    [_vm._v("\n    " + _vm._s(_vm.params.message) + "\n\n    ")]
   )
 }
 var staticRenderFns = []
@@ -24009,15 +24039,19 @@ var Plugin = {
       dialog: function dialog(message) {
         var _this = this;
 
-        // this.$modal.dialog('Hello there')
+        var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+        if (typeof message === 'string') {
+          params.message = message;
+        } else {
+          params = message;
+        }
+
         return new Promise(function (resolve, reject) {
-          _this.show('dialog', {
-            message: message
-          });
+          _this.show('dialog', params);
 
           Plugin.events.$on('clicked', function (confirmed) {
-            resolve(confirmed);
-            console.log(confirmed);
+            return resolve(confirmed);
           });
         });
       }

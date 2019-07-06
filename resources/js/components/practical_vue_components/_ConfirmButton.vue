@@ -1,27 +1,35 @@
 <template>
-    <button>
+    <button @click="confirm">
         <slot></slot>
     </button>
 </template>
 
 <script>
     export default {
-        props: [],
-
-        components: {},
+        props: {
+            message: {},
+            confirmButton: { default: 'Continue' },
+            cancelButton: { default: 'Cancel' }
+        },
 
         data() {
-            return {
-                
-            }
+            return { confirmed: false };
         },
-
-        computed: {
-            
-        },
-
+        
         methods: {
-            
+            confirm(e) {
+                if (this.confirmed) {
+                    return;
+                }
+                e.preventDefault();
+                this.$modal.dialog(this._props)
+                    .then(confirmed => {
+                        this.confirmed = confirmed;
+                        if (confirmed) {
+                            this.$el.click();
+                        }
+                    });
+            }
         }
     }
 </script>

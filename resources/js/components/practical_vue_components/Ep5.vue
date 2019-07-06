@@ -21,7 +21,8 @@
         props: [],
 
         components: {
-            ConfirmDialog
+            ConfirmDialog,
+            ConfirmButton
         },
 
         data() {

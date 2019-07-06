@@ -19,15 +19,19 @@ let Plugin = {
                 location.hash = '#';
             },
 
-            dialog(message) {
-                // this.$modal.dialog('Hello there')
+            dialog(message, params = {}) {
+                if (typeof message === 'string') {
+                    params.message = message;
+                } else {
+                    params = message;
+                }
+
                 return new Promise((resolve, reject) => {
-                    this.show('dialog', { message });
-                    
-                    Plugin.events.$on('clicked', confirmed => {
-                        resolve(confirmed);
-                        console.log(confirmed);
-                    });
+                    this.show('dialog', params);
+
+                    Plugin.events.$on(
+                        'clicked', confirmed => resolve(confirmed)
+                    );
                 });
             }
         }
