@@ -20,6 +20,6 @@ Route::get('/{any?}', function () {
 })->where('any', '.*');
 
 
-Route::post('confirmation-button', function () {
+Route::get('confirmation-button', function () {
     return 'Form submitted';
 });

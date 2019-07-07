@@ -3091,6 +3091,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3103,7 +3129,22 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {
+    confirm: function confirm(message) {
+      var _this = this;
+
+      this.$modal.dialog(message).then(function (confirmed) {
+        // confirmed ? alert('Proceed') : alert('Cancel');
+        if (confirmed) {
+          alert('Proceed');
+        } else {
+          _this.$modal.dialog('Okay, canceled', {
+            confirmButton: 'Got It'
+          });
+        }
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -3146,13 +3187,24 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      e.preventDefault();
+      e.preventDefault(); // Call object
+      // this.$modal.dialog({
+      //     message: this.message,
+      //     confirmation: this.confirmation,
+      //     cancelButton: this.cancelButton
+      // })
+      // refers props using this._props
+
       this.$modal.dialog(this._props).then(function (confirmed) {
         _this.confirmed = confirmed;
 
         if (confirmed) {
           _this.$el.click();
-        }
+        } // if wanna show a different modal
+        // else {
+        //     this.$modal.dialog('Okay, canceled.');
+        // }
+
       });
     }
   }
@@ -7374,8 +7426,68 @@ var render = function() {
         _c(
           "form",
           { attrs: { method: "POST" } },
-          [_c("confirm-button", [_vm._v("Submit")])],
+          [
+            _c(
+              "confirm-button",
+              {
+                staticClass:
+                  "bg-blue hover:bg-blue py-2 px-4 text-white rounded-lg",
+                attrs: {
+                  message: "Are you sure you want to cancel your account?"
+                }
+              },
+              [_vm._v("\n                Option 1\n            ")]
+            )
+          ],
           1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-6" }, [
+        _c(
+          "form",
+          { attrs: { method: "POST" } },
+          [
+            _c(
+              "confirm-button",
+              {
+                staticClass:
+                  "bg-blue hover:bg-blue py-2 px-4 text-white rounded-lg",
+                attrs: {
+                  message: "Are you sure you want to cancel your account?",
+                  "cancel-button": "Go Back",
+                  "confirm-button": "Continue On"
+                }
+              },
+              [_vm._v("\n                Option 2\n            ")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-6" }, [
+        _c(
+          "form",
+          {
+            attrs: { method: "POST" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.confirm("Are you really sure about this?")
+              }
+            }
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "bg-blue hover:bg-blue py-2 px-4 text-white rounded-lg"
+              },
+              [_vm._v("\n                Option 3\n            ")]
+            )
+          ]
         )
       ])
     ],
@@ -7440,7 +7552,7 @@ var render = function() {
               _vm.params.cancelButton
                 ? _c("button", {
                     staticClass:
-                      "bg-gray-500 hover:bg-gray-600 py-2 px-4 text-white rounded-lg mr-2",
+                      "bg-grey hover:bg-grey py-2 px-4 text-white rounded-lg mr-2",
                     domProps: { textContent: _vm._s(_vm.params.cancelButton) },
                     on: {
                       click: function($event) {
@@ -7454,7 +7566,7 @@ var render = function() {
               _vm.params.confirmButton
                 ? _c("button", {
                     staticClass:
-                      "bg-blue-500 hover:bg-blue-600 py-2 px-4 text-white rounded-lg",
+                      "bg-blue hover:bg-blue py-2 px-4 text-white rounded-lg",
                     domProps: { textContent: _vm._s(_vm.params.confirmButton) },
                     on: {
                       click: function($event) {
