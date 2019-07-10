@@ -61,7 +61,7 @@
                             </div>
 
 
-                            <div>
+                            <div class="mb-10">
                                 <h5 class="uppercase font-bold mb-5 text-base">Practical Vue Components</h5>
 
                                 <ul class="list-reset">
@@ -70,6 +70,14 @@
                                     <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep3" class="text-black">Ep3: Show an Element When Another is Hidden</router-link></li>
                                     <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep4" class="text-black">Ep4: Modals and Custom Vue Plugins</router-link></li>
                                     <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep5" class="text-black">Ep5: Confirmation Dialogs and Buttons</router-link></li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5 class="uppercase font-bold mb-5 text-base">Whatcha Working On</h5>
+
+                                <ul class="list-reset">
+                                    <li class="text-sm leading-loose"><router-link to="/whatcha_working_on/ep38" class="text-black">Ep38: How to Dynamically Inline SVG Files in Vue Components</router-link></li>
                                 </ul>
                             </div>
                         </aside>
