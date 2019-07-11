@@ -15,4 +15,9 @@ require('laravel-mix-tailwind');
 
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
-   .tailwind();
+   .tailwind()
+   .override(config => {
+      let svgRule = config.module.rules.find(rule => rule.test.test('.svg'))
+
+      svgRule.exclude = /\.svg/;
+   });
