@@ -1,7 +1,11 @@
 <template>
 <div>
-    <div v-html="icon(achievement)">
-            
+    <div class="flex">
+        <li v-for="(achievement, index) in achievements" :key='index'
+            class="rounded-full flex items-center justify-center"
+        >
+            <div v-html="icon(achievement)"></div>
+        </li>
     </div>
 
 <!-- <div>
@@ -22,7 +26,9 @@
 
         data() {
             return {
-                achievement: 'person'
+                achievements: [
+                    'person', 'personw'
+                ]
             }
         },
 
@@ -32,7 +38,7 @@
 
         methods: {
             icon(achievement) {
-                return require('../../../images/person.svg');
+                return require('../../../images/' + achievement + '.svg');
             }
         }
     }
