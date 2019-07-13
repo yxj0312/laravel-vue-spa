@@ -13,6 +13,7 @@ import Ep2 from './components/practical_vue_components/Ep2';
 import Ep3 from './components/practical_vue_components/Ep3';
 import Ep4 from './components/practical_vue_components/Ep4';
 import Ep5 from './components/practical_vue_components/Ep5';
+import Ep6 from './components/practical_vue_components/Ep6';
 import Ep38 from './components//whatcha_working_on/Ep38';
 
 let LoadersAndAnimations = () =>
@@ -106,8 +107,14 @@ export default {
         },
 
         {
+            path: '/practical_vue_components/ep6',
+            component: Ep6
+        },
+
+        {
             path: '/whatcha_working_on/ep38',
             component: Ep38
         },
+
     ]
 }

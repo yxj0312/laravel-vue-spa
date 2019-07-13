@@ -70,6 +70,7 @@
                                     <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep3" class="text-black">Ep3: Show an Element When Another is Hidden</router-link></li>
                                     <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep4" class="text-black">Ep4: Modals and Custom Vue Plugins</router-link></li>
                                     <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep5" class="text-black">Ep5: Confirmation Dialogs and Buttons</router-link></li>
+                                    <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep6" class="text-black">Ep6: Inline SVGs Using Render Functions</router-link></li>
                                 </ul>
                             </div>
 
