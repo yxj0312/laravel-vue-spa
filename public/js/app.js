@@ -3095,6 +3095,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _InlineSvg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_InlineSvg */ "./resources/js/components/practical_vue_components/_InlineSvg.js");
 //
 //
 //
@@ -3109,9 +3110,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
-  components: {},
+  components: {
+    InlineSvg: _InlineSvg__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       achievements: ['person', 'personw']
@@ -7535,7 +7544,16 @@ var render = function() {
             key: index,
             staticClass: "rounded-full flex items-center justify-center"
           },
-          [_c("inline-svg")],
+          [
+            _c("inline-svg", {
+              attrs: {
+                name: achievement,
+                classes: "bg-red",
+                width: "50px",
+                height: "50px"
+              }
+            })
+          ],
           1
         )
       }),
@@ -24093,6 +24111,85 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDown_vue_vue_type_template_id_5950bc85___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/practical_vue_components/_InlineSvg.js":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/practical_vue_components/_InlineSvg.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Svg =
+/*#__PURE__*/
+function () {
+  function Svg(name) {
+    _classCallCheck(this, Svg);
+
+    var div = document.createElement('div');
+    div.innerHTML = __webpack_require__("./resources/images sync recursive ^\\.\\/.*\\.svg$")("./" + name + ".svg"); // be careful with dynamic webpack requires.
+
+    var fragment = document.createDocumentFragment();
+    fragment.appendChild(div);
+    this.svg = fragment.querySelector('svg');
+  }
+
+  _createClass(Svg, [{
+    key: "classes",
+    value: function classes(_classes) {
+      if (_classes) {
+        this.svg.classList.add(_classes);
+      }
+
+      return this;
+    }
+  }, {
+    key: "width",
+    value: function width(_width) {
+      if (_width) {
+        this.svg.setAttribute('width', _width);
+      }
+
+      return this;
+    }
+  }, {
+    key: "height",
+    value: function height(_height) {
+      if (_height) {
+        this.svg.setAttribute('height', _height);
+      }
+
+      return this;
+    }
+  }, {
+    key: "toString",
+    value: function toString() {
+      return this.svg.outerHTML;
+    }
+  }]);
+
+  return Svg;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['name', 'classes', 'width', 'height'],
+  render: function render(h) {
+    return h('div', {
+      domProps: {
+        innerHTML: new Svg(this.name).classes(this.classes).width(this.width).height(this.height)
+      }
+    });
+  }
+});
 
 /***/ }),
 

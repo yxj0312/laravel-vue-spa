@@ -5,7 +5,12 @@
                 class="rounded-full flex items-center justify-center"
             >
 
-                <inline-svg></inline-svg>
+                <inline-svg 
+                    :name="achievement"
+                    classes="bg-red"
+                    width="50px"
+                    height="50px"
+                ></inline-svg>
                 <!-- <div v-html="icon(achievement)"></div> -->
             </li>
         </div>
@@ -13,10 +18,13 @@
 </template>
 
 <script>
+    import InlineSvg from './_InlineSvg';
+
     export default {
         props: [],
 
         components: {
+            InlineSvg
         },
 
         data() {
