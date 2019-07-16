@@ -11,7 +11,19 @@
                     width="50px"
                     height="50px"
                 ></inline-svg>
-                <!-- <div v-html="icon(achievement)"></div> -->
+            </li>
+        </div>
+
+        <div class="flex">
+            <li v-for="(achievement, index) in achievements" :key='index'
+                class="rounded-full flex items-center justify-center"
+            >
+                <inline-svg-vue
+                    :name="achievement"
+                    classes="bg-red"
+                    width="50px"
+                    height="50px"
+                ></inline-svg-vue>
             </li>
         </div>
     </div>
@@ -19,12 +31,14 @@
 
 <script>
     import InlineSvg from './_InlineSvg';
+    import InlineSvgVue from './_InlineSvgVue'
 
     export default {
         props: [],
 
         components: {
-            InlineSvg
+            InlineSvg,
+            InlineSvgVue
         },
 
         data() {
