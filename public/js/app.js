@@ -3346,8 +3346,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['name', 'classes', 'width', 'height'],
   components: {},
@@ -7829,11 +7827,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {
-    class: _vm.classes,
-    attrs: { width: _vm.width },
-    domProps: { innerHTML: _vm._s(_vm.showSvg(_vm.name)) }
-  })
+  return _c("div", { domProps: { innerHTML: _vm._s(_vm.showSvg(_vm.name)) } })
 }
 var staticRenderFns = []
 render._withStripped = true

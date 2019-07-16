@@ -1,7 +1,5 @@
 <template>
-    <div v-html="showSvg(name)"
-        :class="classes"
-        :width="width"></div>
+    <div v-html="showSvg(name)"></div>
 </template>
 
 <script>
