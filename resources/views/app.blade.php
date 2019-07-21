@@ -74,10 +74,11 @@
                                 </ul>
                             </div>
 
-                            <div>
+                            <div class="mb-10">
                                 <h5 class="uppercase font-bold mb-5 text-base">Whatcha Working On</h5>
 
                                 <ul class="list-reset">
+                                    <li class="text-sm leading-loose"><router-link to="/whatcha_working_on/ep21" class="text-black">Ep21: Learn Vuex With Me: Part 1</router-link></li>
                                     <li class="text-sm leading-loose"><router-link to="/whatcha_working_on/ep38" class="text-black">Ep38: How to Dynamically Inline SVG Files in Vue Components</router-link></li>
                                 </ul>
                             </div>
