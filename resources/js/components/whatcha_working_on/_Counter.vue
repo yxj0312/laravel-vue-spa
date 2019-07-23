@@ -11,16 +11,21 @@
 </template>
 
 <script>
+    import { mapState, mapMutations } from 'vuex'
+
     export default {
-        computed: {
-            count() {
-                return window.store.state.count;
-            }
-        },
+        computed: mapState(
+            ['count']
+        ),
+
         methods: {
-            increment() {
-                window.store.commit('increment');
-            }
+            custom() {
+
+            },
+
+            // ... calls object rest spread transform from babel
+            // And now is supported by laravel-mix, no need to install plugin in .babelrc
+            ...mapMutations(['increment'])
         }
     }
 </script>
