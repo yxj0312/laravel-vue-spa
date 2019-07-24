@@ -1,7 +1,7 @@
 <template>
     <div class="bg-grey w-64 h-64 flex items-center justify-center">
         <div>
-            {{ count }}
+            {{ count }} (The square root of this number is {{ sqrt }})
 
             <p>
                 <button class="bg-blue py-2 px-4 rounded-lg text-white hover:bg-blue-600" @click="increment">+1</button>
@@ -11,12 +11,24 @@
 </template>
 
 <script>
-    import { mapState, mapMutations } from 'vuex'
+    import { mapState, mapMutations, mapGetters } from 'vuex'
 
     export default {
-        computed: mapState(
-            ['count']
-        ),
+        computed: {
+            ...mapState(['count']),
+
+            // sqrt() {
+            //     return Math.sqrt(this.$store.state.count);
+            // }
+
+            // Move above to store.js and refer it as following:
+            // sqrt() {
+            //     return this.$store.getters.sqrt;
+            // }
+
+            // Or use mapGetters
+            ...mapGetters(['sqrt'])
+        },
 
         methods: {
             custom() {

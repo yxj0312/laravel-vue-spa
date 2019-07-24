@@ -3561,7 +3561,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['count']),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['count']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['sqrt'])),
   methods: _objectSpread({
     custom: function custom() {}
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['increment']))
@@ -8098,7 +8098,13 @@ var render = function() {
     { staticClass: "bg-grey w-64 h-64 flex items-center justify-center" },
     [
       _c("div", [
-        _vm._v("\n        " + _vm._s(_vm.count) + "\n\n        "),
+        _vm._v(
+          "\n        " +
+            _vm._s(_vm.count) +
+            " (The square root of this number is " +
+            _vm._s(_vm.sqrt) +
+            ")\n\n        "
+        ),
         _c("p", [
           _c(
             "button",
@@ -26050,6 +26056,11 @@ __webpack_require__.r(__webpack_exports__);
   mutations: {
     increment: function increment(state) {
       state.count++;
+    }
+  },
+  getters: {
+    sqrt: function sqrt(state) {
+      return Math.sqrt(state.count);
     }
   }
 });

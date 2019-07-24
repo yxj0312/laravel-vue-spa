@@ -7,5 +7,13 @@ export default {
         increment(state) {
             state.count++;
         }
-    } 
+    },
+
+    getters: {
+        sqrt(state) {
+            return Math.sqrt(state.count);
+        }
+    }
+
+
 }
