@@ -3564,7 +3564,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['count']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['sqrt'])),
   methods: _objectSpread({
     custom: function custom() {}
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['increment']))
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['increment']))
 });
 
 /***/ }),
@@ -26055,7 +26055,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   mutations: {
     increment: function increment(state) {
+      // setTimeout(() => state.count++, 2000);
       state.count++;
+    }
+  },
+  actions: {
+    increment: function increment(context) {
+      setTimeout(function () {
+        context.commit('increment');
+      }, 3000);
     }
   },
   getters: {

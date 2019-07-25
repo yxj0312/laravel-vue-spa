@@ -11,7 +11,7 @@
 </template>
 
 <script>
-    import { mapState, mapMutations, mapGetters } from 'vuex'
+    import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
 
     export default {
         computed: {
@@ -37,7 +37,8 @@
 
             // ... calls object rest spread transform from babel
             // And now is supported by laravel-mix, no need to install plugin in .babelrc
-            ...mapMutations(['increment'])
+            // ...mapMutations(['increment'])
+            ...mapActions(['increment'])
         }
     }
 </script>

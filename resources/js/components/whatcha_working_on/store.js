@@ -5,7 +5,16 @@ export default {
 
     mutations: {
         increment(state) {
+            // setTimeout(() => state.count++, 2000);
             state.count++;
+        }
+    },
+
+    actions: {
+        increment (context) {
+            setTimeout(() => {
+                context.commit('increment');
+            }, 3000);
         }
     },
 
@@ -14,6 +23,4 @@ export default {
             return Math.sqrt(state.count);
         }
     }
-
-
 }
