@@ -16,6 +16,7 @@ import Ep5 from './components/practical_vue_components/Ep5';
 import Ep6 from './components/practical_vue_components/Ep6';
 import Ep38 from './components/whatcha_working_on/Ep38';
 import Ep21 from './components/whatcha_working_on/Ep21';
+import Ep23 from './components/vuextodo/Ep23';
 
 let LoadersAndAnimations = () =>
     import(/* webpackChunkName: "loaders-and-animations.bundle" */ './components/LoadersAndAnimations');
@@ -120,6 +121,11 @@ export default {
         {
             path: '/whatcha_working_on/ep21',
             component: Ep21
+        },
+
+        {
+            path: '/vuextodo/ep23',
+            component: Ep23
         },
 
     ]

@@ -5,7 +5,8 @@ import Vuex from 'vuex';
 import axios from 'axios';
 
 import Modal from './plugins/modal/ModalPlugin';
-import store from './components/whatcha_working_on/store';
+// import store from './components/whatcha_working_on/store';
+import store from './components/vuextodo/store';
 
 window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -20,5 +21,7 @@ let app = new Vue({
 
     router: new VueRouter(routes),
 
-    store:new Vuex.Store(store)
+    // store:new Vuex.Store(store),
+
+    store,
 });
