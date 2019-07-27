@@ -3467,6 +3467,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Todo_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_Todo.vue */ "./resources/js/components/vuextodo/_Todo.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
 //
 //
 //
@@ -3476,6 +3487,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   components: {
@@ -3484,12 +3496,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
-  computed: {
-    todos: function todos() {
-      return this.$store.state.todos;
-    }
-  },
-  methods: {}
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['todos'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(['completeAll']))
 });
 
 /***/ }),
@@ -3503,12 +3511,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['todo'],
   components: {},
@@ -3516,7 +3530,7 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   computed: {},
-  methods: {}
+  methods: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['deleteTodo'])
 });
 
 /***/ }),
@@ -8092,7 +8106,15 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h1", [_vm._v("Todo")]),
+      _c("div", { staticClass: "flex items-center" }, [
+        _c("h1", { staticClass: "mr-1" }, [_vm._v("Todo")]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "button", on: { click: _vm.completeAll } },
+          [_vm._v("Complete All")]
+        )
+      ]),
       _vm._v(" "),
       _vm._l(_vm.todos, function(todo, index) {
         return _c("todo", { key: index, attrs: { todo: todo } })
@@ -8124,10 +8146,27 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("li", {
-      staticClass: "todo",
-      domProps: { textContent: _vm._s(_vm.todo.body) }
-    })
+    _c("li", { staticClass: "todo" }, [
+      _c("input", {
+        attrs: { type: "checkbox" },
+        domProps: { checked: _vm.todo.done }
+      }),
+      _vm._v(" "),
+      _c("label", { domProps: { textContent: _vm._s(_vm.todo.body) } }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "button",
+          on: {
+            click: function($event) {
+              return _vm.deleteTodo(_vm.todo)
+            }
+          }
+        },
+        [_vm._v("X")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -26056,8 +26095,18 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       done: true
     }, {
       body: 'Finish homework',
-      done: true
+      done: false
     }]
+  },
+  mutations: {
+    completeAll: function completeAll(state) {
+      state.todos.forEach(function (todo) {
+        return todo.done = true;
+      });
+    },
+    deleteTodo: function deleteTodo(state, todo) {
+      state.todos.splice(state.todos.indexOf(todo), 1);
+    }
   }
 }));
 
@@ -26506,7 +26555,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_practical_vue_components_Ep6__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/practical_vue_components/Ep6 */ "./resources/js/components/practical_vue_components/Ep6.vue");
 /* harmony import */ var _components_whatcha_working_on_Ep38__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/whatcha_working_on/Ep38 */ "./resources/js/components/whatcha_working_on/Ep38.vue");
 /* harmony import */ var _components_whatcha_working_on_Ep21__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/whatcha_working_on/Ep21 */ "./resources/js/components/whatcha_working_on/Ep21.vue");
-/* harmony import */ var _components_vuextodo_Ep23__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/vuextodo/Ep23 */ "./resources/js/components/vuextodo/Ep23.vue");
+/* harmony import */ var _components_vuextodo_Ep23__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/vuextodo/Ep23 */ "./resources/js/components/vuextodo/Ep23.vue");
 
 
 
@@ -26594,7 +26643,7 @@ var LoadersAndAnimations = function LoadersAndAnimations() {
     component: _components_whatcha_working_on_Ep21__WEBPACK_IMPORTED_MODULE_17__["default"]
   }, {
     path: '/vuextodo/ep23',
-    component: _components_vuextodo_Ep23__WEBPACK_IMPORTED_MODULE_19__["default"]
+    component: _components_vuextodo_Ep23__WEBPACK_IMPORTED_MODULE_18__["default"]
   }]
 });
 
