@@ -26219,6 +26219,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutations */ "./resources/js/components/vuextodo/store/mutations.js");
+
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -26235,39 +26237,53 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       done: false
     }]
   },
-  mutations: {
-    // completeAll (state) {
-    //     state.todos.forEach(todo => todo.done = true);
-    // },
-    // We need access value that you should type in, and we will also need to do things like
-    // clear the input once you hit return.
-    // in Ep23.vue, we write an addTodo method that accept event
-    addTodo: function addTodo(_ref, body) {
-      var todos = _ref.todos;
-      todos.push({
-        body: body,
-        done: false
-      });
-    },
-    // Homework: commit a mutation
-    // Update the given todo
-    editTodo: function editTodo() {},
-    completeAll: function completeAll(_ref2) {
-      var todos = _ref2.todos;
-      todos.forEach(function (todo) {
-        return todo.done = true;
-      });
-    },
-    toggleTodo: function toggleTodo(state, todo) {
-      todo.done = !todo.done;
-    },
-    deleteTodo: function deleteTodo(_ref3, todo) {
-      var todos = _ref3.todos;
-      todos.splice(todos.indexOf(todo), 1);
-    }
-  },
+  mutations: _mutations__WEBPACK_IMPORTED_MODULE_2__["mutations"],
   getters: {}
 }));
+
+/***/ }),
+
+/***/ "./resources/js/components/vuextodo/store/mutations.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/vuextodo/store/mutations.js ***!
+  \*************************************************************/
+/*! exports provided: mutations */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mutations", function() { return mutations; });
+var mutations = {
+  // completeAll (state) {
+  //     state.todos.forEach(todo => todo.done = true);
+  // },
+  // We need access value that you should type in, and we will also need to do things like
+  // clear the input once you hit return.
+  // in Ep23.vue, we write an addTodo method that accept event
+  addTodo: function addTodo(_ref, body) {
+    var todos = _ref.todos;
+    todos.push({
+      body: body,
+      done: false
+    });
+  },
+  // Homework: commit a mutation
+  // Update the given todo
+  editTodo: function editTodo() {},
+  completeAll: function completeAll(_ref2) {
+    var todos = _ref2.todos;
+    todos.forEach(function (todo) {
+      return todo.done = true;
+    });
+  },
+  toggleTodo: function toggleTodo(state, todo) {
+    todo.done = !todo.done;
+  },
+  deleteTodo: function deleteTodo(_ref3, todo) {
+    var todos = _ref3.todos;
+    todos.splice(todos.indexOf(todo), 1);
+  }
+};
 
 /***/ }),
 
