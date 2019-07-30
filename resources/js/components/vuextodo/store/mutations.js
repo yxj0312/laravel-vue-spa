@@ -6,11 +6,16 @@ export const mutations = {
     // We need access value that you should type in, and we will also need to do things like
     // clear the input once you hit return.
     // in Ep23.vue, we write an addTodo method that accept event
-    addTodo({ todos }, body) {
-        todos.push({
-            body,
-            done: false
-        });
+    // addTodo({ todos }, body) {
+    //     todos.push({
+    //         body,
+    //         done: false
+    //     });
+    // },
+
+    // actions vision
+    addTodo (state, todo) {
+        state.todos.push(todo)
     },
 
     // Homework: commit a mutation

@@ -3517,10 +3517,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(['completeAll']), {
     // Accept event
+    // addTodo (e) {
+    //     let body = e.target.value;
+    //     // delegate (业务委托)
+    //     this.$store.commit('addTodo', body);
+    //     e.target.value = '';
+    // }
+    // Action version
     addTodo: function addTodo(e) {
-      var body = e.target.value; // delegate (业务委托)
+      var text = e.target.value; // trim() 方法会从一个字符串的两端删除空白字符。
+      // 在这个上下文中的空白字符是所有的空白字符 (space, tab, no-break space 等) 以及所有行终止符字符（如 LF，CR）
 
-      this.$store.commit('addTodo', body);
+      if (text.trim()) {
+        this.$store.dispatch('addTodo', text);
+      }
+
       e.target.value = '';
     }
   })
@@ -26207,6 +26218,27 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/vuextodo/store/actions.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/vuextodo/store/actions.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  addTodo: function addTodo(_ref, body) {
+    var commit = _ref.commit;
+    commit('addTodo', {
+      body: body,
+      done: false
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/components/vuextodo/store/index.js":
 /*!*********************************************************!*\
   !*** ./resources/js/components/vuextodo/store/index.js ***!
@@ -26220,6 +26252,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutations */ "./resources/js/components/vuextodo/store/mutations.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions */ "./resources/js/components/vuextodo/store/actions.js");
+
 
 
 
@@ -26237,6 +26271,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       done: false
     }]
   },
+  actions: _actions__WEBPACK_IMPORTED_MODULE_3__["default"],
   mutations: _mutations__WEBPACK_IMPORTED_MODULE_2__["mutations"],
   getters: {}
 }));
@@ -26260,18 +26295,21 @@ var mutations = {
   // We need access value that you should type in, and we will also need to do things like
   // clear the input once you hit return.
   // in Ep23.vue, we write an addTodo method that accept event
-  addTodo: function addTodo(_ref, body) {
-    var todos = _ref.todos;
-    todos.push({
-      body: body,
-      done: false
-    });
+  // addTodo({ todos }, body) {
+  //     todos.push({
+  //         body,
+  //         done: false
+  //     });
+  // },
+  // actions vision
+  addTodo: function addTodo(state, todo) {
+    state.todos.push(todo);
   },
   // Homework: commit a mutation
   // Update the given todo
   editTodo: function editTodo() {},
-  completeAll: function completeAll(_ref2) {
-    var todos = _ref2.todos;
+  completeAll: function completeAll(_ref) {
+    var todos = _ref.todos;
     todos.forEach(function (todo) {
       return todo.done = true;
     });
@@ -26279,8 +26317,8 @@ var mutations = {
   toggleTodo: function toggleTodo(state, todo) {
     todo.done = !todo.done;
   },
-  deleteTodo: function deleteTodo(_ref3, todo) {
-    var todos = _ref3.todos;
+  deleteTodo: function deleteTodo(_ref2, todo) {
+    var todos = _ref2.todos;
     todos.splice(todos.indexOf(todo), 1);
   }
 };

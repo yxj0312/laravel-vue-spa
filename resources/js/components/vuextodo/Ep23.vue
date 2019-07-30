@@ -50,13 +50,26 @@
             ...mapMutations(['completeAll']),
 
             // Accept event
-            addTodo (e) {
-                let body = e.target.value;
-                // delegate (业务委托)
-                this.$store.commit('addTodo', body);
+            // addTodo (e) {
+            //     let body = e.target.value;
+            //     // delegate (业务委托)
+            //     this.$store.commit('addTodo', body);
 
-                e.target.value = '';
+            //     e.target.value = '';
+            // }
+
+            // Action version
+            addTodo (e) {
+                const text = e.target.value
+                // trim() 方法会从一个字符串的两端删除空白字符。
+                // 在这个上下文中的空白字符是所有的空白字符 (space, tab, no-break space 等) 以及所有行终止符字符（如 LF，CR）
+                if (text.trim()) {
+                    this.$store.dispatch('addTodo', text)
+                }
+
+                e.target.value = ''
             }
+
         }
     }
 </script>
