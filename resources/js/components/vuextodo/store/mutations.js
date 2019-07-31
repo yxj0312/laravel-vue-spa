@@ -20,8 +20,9 @@ export const mutations = {
 
     // Homework: commit a mutation
     // Update the given todo
-    editTodo() {
-
+    editTodo(state, { todo, body = todo.body, done = todo.done }) {
+        todo.body = body
+        todo.done = done
     },
 
     completeAll ({ todos }) {
