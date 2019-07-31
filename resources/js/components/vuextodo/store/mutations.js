@@ -29,9 +29,10 @@ export const mutations = {
         todos.forEach(todo => todo.done = true);
     },
 
-    toggleTodo(state, todo) {
-        todo.done =! todo.done;
-    },
+    // Move to action
+    // toggleTodo(state, todo) {
+    //     todo.done =! todo.done;
+    // },
 
     deleteTodo ( { todos }, todo) {
         todos.splice( todos.indexOf(todo), 1);

@@ -26234,6 +26234,13 @@ __webpack_require__.r(__webpack_exports__);
       body: body,
       done: false
     });
+  },
+  toggleTodo: function toggleTodo(_ref2, todo) {
+    var commit = _ref2.commit;
+    commit('editTodo', {
+      todo: todo,
+      done: !todo.done
+    });
   }
 });
 
@@ -26307,18 +26314,27 @@ var mutations = {
   },
   // Homework: commit a mutation
   // Update the given todo
-  editTodo: function editTodo() {},
-  completeAll: function completeAll(_ref) {
-    var todos = _ref.todos;
+  editTodo: function editTodo(state, _ref) {
+    var todo = _ref.todo,
+        _ref$body = _ref.body,
+        body = _ref$body === void 0 ? todo.body : _ref$body,
+        _ref$done = _ref.done,
+        done = _ref$done === void 0 ? todo.done : _ref$done;
+    todo.body = body;
+    todo.done = done;
+  },
+  completeAll: function completeAll(_ref2) {
+    var todos = _ref2.todos;
     todos.forEach(function (todo) {
       return todo.done = true;
     });
   },
-  toggleTodo: function toggleTodo(state, todo) {
-    todo.done = !todo.done;
-  },
-  deleteTodo: function deleteTodo(_ref2, todo) {
-    var todos = _ref2.todos;
+  // Move to action
+  // toggleTodo(state, todo) {
+  //     todo.done =! todo.done;
+  // },
+  deleteTodo: function deleteTodo(_ref3, todo) {
+    var todos = _ref3.todos;
     todos.splice(todos.indexOf(todo), 1);
   }
 };

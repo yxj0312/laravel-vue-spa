@@ -5,4 +5,8 @@ export default {
             done: false
         })
     },
+
+    toggleTodo ({ commit }, todo) {
+        commit('editTodo', { todo, done: !todo.done })
+    },
 }
