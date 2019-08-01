@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import { mapMutations } from 'vuex'
+    import { mapMutations, mapActions } from 'vuex'
     
     export default {
         props: ['todo'],
@@ -26,7 +26,12 @@
             
         },
 
-        methods: mapMutations(['deleteTodo', 'toggleTodo'])
+        // methods: mapMutations(['deleteTodo', 'toggleTodo'])
+        methods: {
+            ...mapActions([
+                'toggleTodo'
+            ])
+        },
         
     }
 </script>
