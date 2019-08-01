@@ -29,7 +29,8 @@
         // methods: mapMutations(['deleteTodo', 'toggleTodo'])
         methods: {
             ...mapActions([
-                'toggleTodo'
+                'toggleTodo',
+                'deleteTodo'
             ])
         },
         

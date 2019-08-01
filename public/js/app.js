@@ -3574,7 +3574,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: {},
   // methods: mapMutations(['deleteTodo', 'toggleTodo'])
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['toggleTodo']))
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['toggleTodo', 'deleteTodo']))
 });
 
 /***/ }),
@@ -26248,6 +26248,10 @@ __webpack_require__.r(__webpack_exports__);
       todo: todo,
       done: !todo.done
     });
+  },
+  deleteTodo: function deleteTodo(_ref3, todo) {
+    var commit = _ref3.commit;
+    commit('deleteTodo', todo);
   }
 });
 

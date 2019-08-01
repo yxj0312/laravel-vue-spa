@@ -9,4 +9,8 @@ export default {
     toggleTodo ({ commit }, todo) {
         commit('editTodo', { todo, done: !todo.done })
     },
+
+    deleteTodo ({ commit }, todo) {
+        commit('deleteTodo', todo)
+    }
 }
