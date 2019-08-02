@@ -2,8 +2,14 @@
     <div>
         <div class="flex items-center mb-1">
             <h1 class="mr-1">Todo</h1>
-            <button class="button" @click="completeAll" v-show="! allCompleted">Complete All</button>
+            <!-- <button class="button" @click="completeAll" v-show="! allCompleted">Complete All</button> -->
+            <input class="toggle-all" id="toggle-all"
+                type="checkbox"
+                :checked="allCompleted"
+                @change="completeAll(!allCompleted)">
+            <label for="toggle-all">Complete All</label>
         </div>
+
 
         <p class="mb-1">
             <input class="border border-grey" placeholder="Do this..." @keyup.enter="addTodo">
@@ -47,7 +53,10 @@
         },
 
         methods: {
-            ...mapMutations(['completeAll']),
+            // ...mapMutations(['completeAll']),
+            ...mapActions([
+                'completeAll'
+            ]),
 
             // Accept event
             // addTodo (e) {

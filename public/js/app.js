@@ -3492,6 +3492,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3515,7 +3521,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   }),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(['completeAll']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['completeAll']), {
     // Accept event
     // addTodo (e) {
     //     let body = e.target.value;
@@ -8202,22 +8208,18 @@ var render = function() {
       _c("div", { staticClass: "flex items-center mb-1" }, [
         _c("h1", { staticClass: "mr-1" }, [_vm._v("Todo")]),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: !_vm.allCompleted,
-                expression: "! allCompleted"
-              }
-            ],
-            staticClass: "button",
-            on: { click: _vm.completeAll }
-          },
-          [_vm._v("Complete All")]
-        )
+        _c("input", {
+          staticClass: "toggle-all",
+          attrs: { id: "toggle-all", type: "checkbox" },
+          domProps: { checked: _vm.allCompleted },
+          on: {
+            change: function($event) {
+              return _vm.completeAll(!_vm.allCompleted)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "toggle-all" } }, [_vm._v("Complete All")])
       ]),
       _vm._v(" "),
       _c("p", { staticClass: "mb-1" }, [
@@ -26249,8 +26251,18 @@ __webpack_require__.r(__webpack_exports__);
       done: !todo.done
     });
   },
-  deleteTodo: function deleteTodo(_ref3, todo) {
-    var commit = _ref3.commit;
+  completeAll: function completeAll(_ref3, done) {
+    var state = _ref3.state,
+        commit = _ref3.commit;
+    state.todos.forEach(function (todo) {
+      commit('editTodo', {
+        todo: todo,
+        done: done
+      });
+    });
+  },
+  deleteTodo: function deleteTodo(_ref4, todo) {
+    var commit = _ref4.commit;
     commit('deleteTodo', todo);
   }
 });
@@ -26334,18 +26346,16 @@ var mutations = {
     todo.body = body;
     todo.done = done;
   },
-  completeAll: function completeAll(_ref2) {
-    var todos = _ref2.todos;
-    todos.forEach(function (todo) {
-      return todo.done = true;
-    });
-  },
+  // Move to actions
+  // completeAll ({ todos }) {
+  //     todos.forEach(todo => todo.done = true);
+  // },
   // Move to action
   // toggleTodo(state, todo) {
   //     todo.done =! todo.done;
   // },
-  deleteTodo: function deleteTodo(_ref3, todo) {
-    var todos = _ref3.todos;
+  deleteTodo: function deleteTodo(_ref2, todo) {
+    var todos = _ref2.todos;
     todos.splice(todos.indexOf(todo), 1);
   }
 };

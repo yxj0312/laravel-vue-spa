@@ -25,9 +25,10 @@ export const mutations = {
         todo.done = done
     },
 
-    completeAll ({ todos }) {
-        todos.forEach(todo => todo.done = true);
-    },
+    // Move to actions
+    // completeAll ({ todos }) {
+    //     todos.forEach(todo => todo.done = true);
+    // },
 
     // Move to action
     // toggleTodo(state, todo) {
