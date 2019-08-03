@@ -10,9 +10,10 @@
             <label v-text="todo.body" @dblclick="editing = true"></label>
             <button class="button" @click="deleteTodo(todo)">X</button>
         </div>
-        <input class="edit"
+        <input class="border border-grey-lighter"
             type="text"
             v-show="editing"
+            v-focus="editing"
             :value="todo.body"
         >
     </li>
@@ -32,8 +33,14 @@
             }
         },
 
-        computed: {
-            
+        directives: {
+            focus (el, { value }, { context }) {
+                if (value) {
+                    context.$nextTick(() => {
+                    el.focus()
+                    })
+                }
+            }
         },
 
         // methods: mapMutations(['deleteTodo', 'toggleTodo'])

@@ -3581,6 +3581,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['todo'],
@@ -3590,7 +3591,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       editing: false
     };
   },
-  computed: {},
+  directives: {
+    focus: function focus(el, _ref, _ref2) {
+      var value = _ref.value;
+      var context = _ref2.context;
+
+      if (value) {
+        context.$nextTick(function () {
+          el.focus();
+        });
+      }
+    }
+  },
   // methods: mapMutations(['deleteTodo', 'toggleTodo'])
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['toggleTodo', 'deleteTodo']))
 });
@@ -8336,9 +8348,15 @@ var render = function() {
             rawName: "v-show",
             value: _vm.editing,
             expression: "editing"
+          },
+          {
+            name: "focus",
+            rawName: "v-focus",
+            value: _vm.editing,
+            expression: "editing"
           }
         ],
-        staticClass: "edit",
+        staticClass: "border border-grey-lighter",
         attrs: { type: "text" },
         domProps: { value: _vm.todo.body }
       })
