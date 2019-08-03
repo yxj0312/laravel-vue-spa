@@ -3571,12 +3571,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['todo'],
   components: {},
   data: function data() {
-    return {};
+    return {
+      editing: false
+    };
   },
   computed: {},
   // methods: mapMutations(['deleteTodo', 'toggleTodo'])
@@ -8275,12 +8287,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "li",
-      { staticClass: "todo", class: { "is-completed": _vm.todo.done } },
-      [
+  return _c(
+    "li",
+    {
+      staticClass: "todo",
+      class: { "is-completed": _vm.todo.done, editing: _vm.editing }
+    },
+    [
+      _c("div", { staticClass: "view" }, [
         _c("input", {
+          staticClass: "toggle",
           attrs: { type: "checkbox" },
           domProps: { checked: _vm.todo.done },
           on: {
@@ -8290,7 +8306,14 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c("label", { domProps: { textContent: _vm._s(_vm.todo.body) } }),
+        _c("label", {
+          domProps: { textContent: _vm._s(_vm.todo.body) },
+          on: {
+            dblclick: function($event) {
+              _vm.editing = true
+            }
+          }
+        }),
         _vm._v(" "),
         _c(
           "button",
@@ -8304,9 +8327,23 @@ var render = function() {
           },
           [_vm._v("X")]
         )
-      ]
-    )
-  ])
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.editing,
+            expression: "editing"
+          }
+        ],
+        staticClass: "edit",
+        attrs: { type: "text" },
+        domProps: { value: _vm.todo.body }
+      })
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
