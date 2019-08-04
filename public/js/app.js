@@ -3838,7 +3838,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".todo.is-completed {\n  color: grey;\n}\n", ""]);
+exports.push([module.i, ".todo.is-completed {\n  color: grey;\n}\n.todo.editing {\n  color: grey;\n}\n", ""]);
 
 // exports
 

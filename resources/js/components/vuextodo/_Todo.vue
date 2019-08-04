@@ -58,4 +58,8 @@
     .todo.is-completed {
         color: grey;
     }
+    
+    .todo.editing {
+        color: grey;
+    }
 </style>
