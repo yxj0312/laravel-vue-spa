@@ -3582,6 +3582,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['todo'],
@@ -3604,7 +3607,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   // methods: mapMutations(['deleteTodo', 'toggleTodo'])
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['toggleTodo', 'deleteTodo']))
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['editTodo', 'toggleTodo', 'deleteTodo']), {
+    doneEdit: function doneEdit(e) {
+      var value = e.target.value.trim();
+      var todo = this.todo;
+
+      if (!value) {
+        this.deleteTodo(todo);
+      } else if (this.editing) {
+        this.editTodo({
+          todo: todo,
+          value: value
+        });
+        this.editing = false;
+      }
+    },
+    cancelEdit: function cancelEdit(e) {
+      e.target.value = this.todo.body;
+      this.editing = false;
+    }
+  })
 });
 
 /***/ }),
@@ -8358,7 +8380,30 @@ var render = function() {
         ],
         staticClass: "border border-grey-lighter",
         attrs: { type: "text" },
-        domProps: { value: _vm.todo.body }
+        domProps: { value: _vm.todo.body },
+        on: {
+          keyup: [
+            function($event) {
+              if (
+                !$event.type.indexOf("key") &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.doneEdit($event)
+            },
+            function($event) {
+              if (
+                !$event.type.indexOf("key") &&
+                _vm._k($event.keyCode, "esc", 27, $event.key, ["Esc", "Escape"])
+              ) {
+                return null
+              }
+              return _vm.cancelEdit($event)
+            }
+          ],
+          blur: _vm.doneEdit
+        }
       })
     ]
   )
@@ -26316,8 +26361,17 @@ __webpack_require__.r(__webpack_exports__);
       });
     });
   },
-  deleteTodo: function deleteTodo(_ref4, todo) {
+  editTodo: function editTodo(_ref4, _ref5) {
     var commit = _ref4.commit;
+    var todo = _ref5.todo,
+        value = _ref5.value;
+    commit('editTodo', {
+      todo: todo,
+      body: value
+    });
+  },
+  deleteTodo: function deleteTodo(_ref6, todo) {
+    var commit = _ref6.commit;
     commit('deleteTodo', todo);
   }
 });

@@ -16,6 +16,10 @@ export default {
         })
     },
 
+    editTodo ({ commit }, { todo, value }) {
+        commit('editTodo', { todo, body: value })
+    },
+
     deleteTodo ({ commit }, todo) {
         commit('deleteTodo', todo)
     }

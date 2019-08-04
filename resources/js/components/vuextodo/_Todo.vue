@@ -15,6 +15,9 @@
             v-show="editing"
             v-focus="editing"
             :value="todo.body"
+            @keyup.enter="doneEdit"
+            @keyup.esc="cancelEdit"
+            @blur="doneEdit"
         >
     </li>
 </template>
@@ -46,9 +49,30 @@
         // methods: mapMutations(['deleteTodo', 'toggleTodo'])
         methods: {
             ...mapActions([
+                'editTodo',
                 'toggleTodo',
                 'deleteTodo'
-            ])
+            ]),
+
+            doneEdit(e) {
+                const value = e.target.value.trim()
+                const { todo } = this
+                if (!value) {
+                    this.deleteTodo(todo)
+                } else if (this.editing) {
+                    this.editTodo({
+                        todo,
+                        value
+                    })
+                    this.editing = false
+                }
+            },
+
+            cancelEdit (e) {
+                e.target.value = this.todo.body
+                this.editing = false
+            }
+
         },
         
     }
@@ -58,7 +82,7 @@
     .todo.is-completed {
         color: grey;
     }
-    
+
     .todo.editing {
         color: grey;
     }
