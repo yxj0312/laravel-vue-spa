@@ -1,30 +1,62 @@
 <template>
     <div>
-        <div class="flex items-center mb-1">
-            <h1 class="mr-1">Todo</h1>
-            <!-- <button class="button" @click="completeAll" v-show="! allCompleted">Complete All</button> -->
+        <h1 class="mr-1">Todo</h1>
+        <!-- <button class="button" @click="completeAll" v-show="! allCompleted">Complete All</button> -->
+        <p class="mb-1">
+            <input class="border border-grey" placeholder="Do this..." @keyup.enter="addTodo">
+        </p>
+
+
+        <section v-show="todos.length">
             <input class="toggle-all" id="toggle-all"
                 type="checkbox"
                 :checked="allCompleted"
                 @change="completeAll(!allCompleted)">
             <label for="toggle-all">Complete All</label>
-        </div>
+
+            <todo
+                v-for="(todo, index) in filteredTodos"
+                :todo="todo"
+                :key="index"
+                class="list-reset"
+            ></todo>
+        </section>
+
+        <footer v-show="todos.length">
+            <span class="todo-count">
+                <strong>{{ remaining }}</strong>
+                {{ remaining | pluralize('item') }} left
+            </span>
+
+            <ul class="list-reset">
+               <li
+                    v-for="(val, key, index) in filters"
+                    :key="index"
+               >
+                    <a
+                    :href="'#/' + key"
+                    :class="{ selected: visibility === key }"
+                    @click="visibility = key"
+                    >{{ key | capitalize }}</a>
+               </li>
+            </ul>
+        </footer>
 
 
-        <p class="mb-1">
-            <input class="border border-grey" placeholder="Do this..." @keyup.enter="addTodo">
-        </p>
-
-        <todo v-for="(todo, index) in todos" :todo="todo" :key="index"></todo>
-
-        <p>Add new ability: Double click on a single todo, display an input, where you can change the text.
-        </p>
+        <!-- <p>Add new ability: Double click on a single todo, display an input, where you can change the text.
+        </p> -->
     </div>
 </template>
 
 <script>
     import todo from './_Todo.vue'
     import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
+
+    const filters = {
+        all: todos => todos,
+        active: todos => todos.filter(todo => !todo.done),
+        completed: todos => todos.filter(todo => todo.done)
+    }
 
     export default {
         props: [],
@@ -33,6 +65,8 @@
 
         data() {
             return {
+                visibility: 'all',
+                filters: filters
             }
         },
 
@@ -47,8 +81,16 @@
             // We can leave it here, or use getters
             allCompleted() {
                 // every returns a boolean.
-                // it returns true, if every item within todos has a done property 
+                // it returns true, if every item within todos has a done property
                 return this.todos.every(todo => todo.done);
+            },
+
+            filteredTodos () {
+                return filters[this.visibility](this.todos)
+            },
+
+            remaining () {
+                return this.todos.filter(todo => !todo.done).length
             }
         },
 
@@ -77,8 +119,18 @@
                 }
 
                 e.target.value = ''
-            }
+            },
+        },
 
+        filters: {
+            pluralize: (n, w) => n === 1 ? w : (w + 's'),
+            capitalize: s => s.charAt(0).toUpperCase() + s.slice(1)
         }
     }
 </script>
+
+<style>
+    .selected {
+        color: blue
+    }
+</style>

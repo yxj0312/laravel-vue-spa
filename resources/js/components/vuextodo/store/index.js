@@ -11,6 +11,7 @@ export default new Vuex.Store({
             { body: 'Go to the store', done: false },
             { body: 'Buy groceries', done: true },
             { body: 'Finish homework', done: false },
+            { body: 'test capitalize', done: false },
         ]
     },
 
