@@ -3524,6 +3524,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 var filters = {
@@ -3573,7 +3579,7 @@ var filters = {
       }).length;
     }
   }),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['completeAll']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['completeAll', 'clearCompleted']), {
     // Accept event
     // addTodo (e) {
     //     let body = e.target.value;
@@ -8462,6 +8468,23 @@ var render = function() {
             ])
           }),
           0
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.todos.length > _vm.remaining,
+                expression: "todos.length > remaining"
+              }
+            ],
+            staticClass: "button",
+            on: { click: _vm.clearCompleted }
+          },
+          [_vm._v("\n            Clear completed\n        ")]
         )
       ]
     )
@@ -26615,6 +26638,15 @@ __webpack_require__.r(__webpack_exports__);
   deleteTodo: function deleteTodo(_ref6, todo) {
     var commit = _ref6.commit;
     commit('deleteTodo', todo);
+  },
+  clearCompleted: function clearCompleted(_ref7) {
+    var state = _ref7.state,
+        commit = _ref7.commit;
+    state.todos.filter(function (todo) {
+      return todo.done;
+    }).forEach(function (todo) {
+      commit('deleteTodo', todo);
+    });
   }
 });
 

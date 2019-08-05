@@ -40,6 +40,12 @@
                     >{{ key | capitalize }}</a>
                </li>
             </ul>
+
+            <button class="button"
+                v-show="todos.length > remaining"
+                @click="clearCompleted">
+                Clear completed
+            </button>
         </footer>
 
 
@@ -97,7 +103,8 @@
         methods: {
             // ...mapMutations(['completeAll']),
             ...mapActions([
-                'completeAll'
+                'completeAll',
+                'clearCompleted'
             ]),
 
             // Accept event

@@ -22,5 +22,12 @@ export default {
 
     deleteTodo ({ commit }, todo) {
         commit('deleteTodo', todo)
-    }
+    },
+
+    clearCompleted ({ state, commit }) {
+        state.todos.filter(todo => todo.done)
+            .forEach(todo => {
+                commit('deleteTodo', todo)
+        })
+  }
 }
