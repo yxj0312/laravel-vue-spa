@@ -14,6 +14,7 @@ import Ep3 from './components/practical_vue_components/Ep3';
 import Ep4 from './components/practical_vue_components/Ep4';
 import Ep5 from './components/practical_vue_components/Ep5';
 import Ep6 from './components/practical_vue_components/Ep6';
+import Ep7 from './components/practical_vue_components/Ep7';
 import Ep38 from './components/whatcha_working_on/Ep38';
 import Ep21 from './components/whatcha_working_on/Ep21';
 import Ep23 from './components/vuextodo/Ep23';
@@ -35,7 +36,7 @@ export default {
         {
             path: '/',
             component: Logo
-        }, 
+        },
 
         {
             path: '/logo-symbol',
@@ -111,6 +112,11 @@ export default {
         {
             path: '/practical_vue_components/ep6',
             component: Ep6
+        },
+
+        {
+            path: '/practical_vue_components/ep7',
+            component: Ep7
         },
 
         {

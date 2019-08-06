@@ -22,12 +22,12 @@
                         <aside class="w-64 pt-8 flex-no-shrink">
                             <div class="mb-10">
                                 <h5 class="uppercase font-bold mb-5 text-base">The Brand</h5>
-                                
+
                                 <ul class="list-reset">
                                     <li class="text-sm leading-loose"><router-link to="/" class="text-black" exact>Logo</router-link></li>
-                                    <li class="text-sm leading-loose"><router-link to="/logo-symbol" class="text-black">Logo Symbol</router-link></li> 
-                                    <li class="text-sm leading-loose"><router-link to="/colors" class="text-black">Colors</router-link></li> 
-                                    <li class="text-sm leading-loose"><router-link to="/typography" class="text-black">Typography</router-link></li> 
+                                    <li class="text-sm leading-loose"><router-link to="/logo-symbol" class="text-black">Logo Symbol</router-link></li>
+                                    <li class="text-sm leading-loose"><router-link to="/colors" class="text-black">Colors</router-link></li>
+                                    <li class="text-sm leading-loose"><router-link to="/typography" class="text-black">Typography</router-link></li>
                                     {{-- <router-link :to="{ name: 'about' }">About</router-link> --}}
                                 </ul>
                             </div>
@@ -37,9 +37,9 @@
 
                                 <ul class="list-reset">
                                     <li class="text-sm leading-loose"><router-link to="/mascot" class="text-black">Mascot</router-link></li>
-                                    <li class="text-sm leading-loose"><router-link to="/illustrations" class="text-black">Illustrations</router-link></li> 
-                                    <li class="text-sm leading-loose"><router-link to="/loaders-and-animations" class="text-black">Loaders & Animations</router-link></li> 
-                                    <li class="text-sm leading-loose"><router-link to="/wallpapers" class="text-black">Wallpapers</router-link></li> 
+                                    <li class="text-sm leading-loose"><router-link to="/illustrations" class="text-black">Illustrations</router-link></li>
+                                    <li class="text-sm leading-loose"><router-link to="/loaders-and-animations" class="text-black">Loaders & Animations</router-link></li>
+                                    <li class="text-sm leading-loose"><router-link to="/wallpapers" class="text-black">Wallpapers</router-link></li>
                                 </ul>
                             </div>
 
@@ -71,6 +71,7 @@
                                     <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep4" class="text-black">Ep4: Modals and Custom Vue Plugins</router-link></li>
                                     <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep5" class="text-black">Ep5: Confirmation Dialogs and Buttons</router-link></li>
                                     <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep6" class="text-black">Ep6: Inline SVGs Using Render Functions</router-link></li>
+                                    <li class="text-sm leading-loose"><router-link to="/practical_vue_components/ep7" class="text-black">Ep7: Tabs</router-link></li>
                                 </ul>
                             </div>
 
