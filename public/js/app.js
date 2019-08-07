@@ -3537,21 +3537,16 @@ __webpack_require__.r(__webpack_exports__);
     this.activeTab = this.tabs[0];
   },
   watch: {
-    activeTab: function (_activeTab) {
-      function activeTab(_x) {
-        return _activeTab.apply(this, arguments);
-      }
-
-      activeTab.toString = function () {
-        return _activeTab.toString();
-      };
-
-      return activeTab;
-    }(function (tab) {
+    // Update the property for each of the children.
+    activeTab: function activeTab(_activeTab) {
+      // Map over all of the tabs
+      // Set the tab show property equal to whether or not the current tab is the active tab
+      // Looping over all of the children, and we are updating its show property
+      // Every single tab will have its show prop set to false, except for the one that is the actively selected tab.
       this.tabs.map(function (tab) {
-        return tab.show = tab == activeTab;
+        return tab.show = tab == _activeTab;
       });
-    })
+    }
   },
   methods: {}
 });

@@ -44,7 +44,12 @@
         },
 
         watch: {
-            activeTab(tab) {
+            // Update the property for each of the children.
+            activeTab(activeTab) {
+                // Map over all of the tabs
+                // Set the tab show property equal to whether or not the current tab is the active tab
+                // Looping over all of the children, and we are updating its show property
+                // Every single tab will have its show prop set to false, except for the one that is the actively selected tab.
                 this.tabs.map(tab => (tab.show = tab == activeTab))
             }
         },
