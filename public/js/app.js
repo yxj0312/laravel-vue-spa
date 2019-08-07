@@ -3520,6 +3520,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['title'],
   components: {},
@@ -3532,7 +3534,24 @@ __webpack_require__.r(__webpack_exports__);
   computed: {},
   mounted: function mounted() {
     this.tabs = this.$children;
-    this.tabs[0].show = true;
+    this.activeTab = this.tabs[0];
+  },
+  watch: {
+    activeTab: function (_activeTab) {
+      function activeTab(_x) {
+        return _activeTab.apply(this, arguments);
+      }
+
+      activeTab.toString = function () {
+        return _activeTab.toString();
+      };
+
+      return activeTab;
+    }(function (tab) {
+      this.tabs.map(function (tab) {
+        return tab.show = tab == activeTab;
+      });
+    })
   },
   methods: {}
 });
@@ -8549,6 +8568,8 @@ var render = function() {
             },
             [
               _c("button", {
+                staticClass: "focus:outline-0",
+                class: { "font-bold": tab == _vm.activeTab },
                 attrs: { role: "tab" },
                 domProps: { textContent: _vm._s(tab.title) },
                 on: {
