@@ -3,11 +3,14 @@
         <ul class="border-b border-grey-light flex mb-4 list-reset">
             <li v-for="(tab, index) in tabs"
                 :key="index"
-                class="border border-b-0 rounded-t-lg px-4 py-2 bg-white">
+                class="px-4 py-2 bg-white"
+                :class="{ 'border border-b-0 rounded-t-lg ': tab == activeTab }"
+                :style="tab == activeTab ? 'margin-bottom: -1px' : ''"
+            >
                 <button
                     v-text="tab.title"
                     :class="{ 'font-bold': tab == activeTab }"
-                    class="focus:outline-0"
+                    class="focus:outline-none"
                     role="tab"
                     @click="activeTab = tab"
                 >
@@ -40,7 +43,7 @@
         mounted() {
             this.tabs = this.$children
 
-            this.activeTab = this.tabs[0]
+            this.setInitialActiveTab(); 
         },
 
         watch: {
@@ -55,7 +58,9 @@
         },
 
         methods: {
-
+            setInitialActiveTab() {
+                this.activeTab = this.tabs.find(tab => tab.active) || this.tabs[0];
+            }
         }
     }
 </script>

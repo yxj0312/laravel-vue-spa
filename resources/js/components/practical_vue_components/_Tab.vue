@@ -6,7 +6,13 @@
 
 <script>
     export default {
-        props: ['title'],
+        props: {
+            'title': {},
+            active: {
+                type: Boolean,
+                default: false
+            }
+        },
 
         components: {},
 

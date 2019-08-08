@@ -3183,6 +3183,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3478,7 +3482,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['title'],
+  props: {
+    'title': {},
+    active: {
+      type: Boolean,
+      "default": false
+    }
+  },
   components: {},
   data: function data() {
     return {
@@ -3522,6 +3532,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['title'],
   components: {},
@@ -3534,7 +3547,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {},
   mounted: function mounted() {
     this.tabs = this.$children;
-    this.activeTab = this.tabs[0];
+    this.setInitialActiveTab();
   },
   watch: {
     // Update the property for each of the children.
@@ -3548,7 +3561,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  methods: {}
+  methods: {
+    setInitialActiveTab: function setInitialActiveTab() {
+      this.activeTab = this.tabs.find(function (tab) {
+        return tab.active;
+      }) || this.tabs[0];
+    }
+  }
 });
 
 /***/ }),
@@ -4027,7 +4046,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".pop-out-quick-enter-active,\n.pop-out-quick-leave-active {\n  transition: all .4s;\n}\n.pop-out-quick-enter,\n.pop-out-quick-leave-active {\n  opacity: 0;\n  transform: translateY(-7px);\n}\n", ""]);
+exports.push([module.i, ".pop-out-quick-enter-active,\n.pop-out-quick-leave-active {\n  transition: all .4s;\n}\n.pop-out-quick-enter,\n.pop-out-quick-leave-active {\n  opacity: 0;\n  -webkit-transform: translateY(-7px);\n          transform: translateY(-7px);\n}\n", ""]);
 
 // exports
 
@@ -6796,7 +6815,7 @@ var staticRenderFns = [
           staticClass:
             "font-normal text-3xl text-grey-darkest leading-none mb-8"
         },
-        [_vm._v("\r\n        Logo Symbol\r\n    ")]
+        [_vm._v("\n        Logo Symbol\n    ")]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "mb-12" }, [
@@ -6824,7 +6843,7 @@ var staticRenderFns = [
           _c(
             "a",
             { staticClass: "button", attrs: { href: "/images/logo.svg" } },
-            [_vm._v("\r\n                symbol-original.svg\r\n            ")]
+            [_vm._v("\n                symbol-original.svg\n            ")]
           )
         ])
       ]),
@@ -6847,10 +6866,10 @@ var staticRenderFns = [
         _c("div", { staticClass: "flex justify-between items-center" }, [
           _c("p", [
             _vm._v(
-              "\r\n                Negative symbol with accent on\r\n                "
+              "\n                Negative symbol with accent on\n                "
             ),
             _c("strong", [_vm._v("dark")]),
-            _vm._v(" background\r\n            ")
+            _vm._v(" background\n            ")
           ]),
           _vm._v(" "),
           _c(
@@ -6859,7 +6878,7 @@ var staticRenderFns = [
               staticClass: "button",
               attrs: { href: "/images/symbol-negative.svg" }
             },
-            [_vm._v("\r\n                symbol-negative.svg\r\n            ")]
+            [_vm._v("\n                symbol-negative.svg\n            ")]
           )
         ])
       ]),
@@ -6892,11 +6911,7 @@ var staticRenderFns = [
               staticClass: "button",
               attrs: { href: "/images/symbol-pure-negative.svg" }
             },
-            [
-              _vm._v(
-                "\r\n                symbol-pure-negative.svg\r\n            "
-              )
-            ]
+            [_vm._v("\n                symbol-pure-negative.svg\n            ")]
           )
         ])
       ])
@@ -8266,6 +8281,10 @@ var render = function() {
           _vm._v(" "),
           _c("tab", { attrs: { title: "Third" } }, [
             _c("p", [_vm._v("Hello world and out.")])
+          ]),
+          _vm._v(" "),
+          _c("tab", { attrs: { title: "Wew", active: "" } }, [
+            _c("p", [_vm._v("It works!")])
           ])
         ],
         1
@@ -8559,11 +8578,15 @@ var render = function() {
             "li",
             {
               key: index,
-              staticClass: "border border-b-0 rounded-t-lg px-4 py-2 bg-white"
+              staticClass: "px-4 py-2 bg-white",
+              class: {
+                "border border-b-0 rounded-t-lg ": tab == _vm.activeTab
+              },
+              style: tab == _vm.activeTab ? "margin-bottom: -1px" : ""
             },
             [
               _c("button", {
-                staticClass: "focus:outline-0",
+                staticClass: "focus:outline-none",
                 class: { "font-bold": tab == _vm.activeTab },
                 attrs: { role: "tab" },
                 domProps: { textContent: _vm._s(tab.title) },
@@ -9195,8 +9218,8 @@ function normalizeComponent (
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /*!
-  * vue-router v3.0.7
-  * (c) 2019 Evan You
+  * vue-router v3.0.2
+  * (c) 2018 Evan You
   * @license MIT
   */
 /*  */
@@ -9254,14 +9277,11 @@ var View = {
     var depth = 0;
     var inactive = false;
     while (parent && parent._routerRoot !== parent) {
-      var vnodeData = parent.$vnode && parent.$vnode.data;
-      if (vnodeData) {
-        if (vnodeData.routerView) {
-          depth++;
-        }
-        if (vnodeData.keepAlive && parent._inactive) {
-          inactive = true;
-        }
+      if (parent.$vnode && parent.$vnode.data.routerView) {
+        depth++;
+      }
+      if (parent._inactive) {
+        inactive = true;
       }
       parent = parent.$parent;
     }
@@ -9298,17 +9318,6 @@ var View = {
     // in case the same component instance is reused across different routes
     ;(data.hook || (data.hook = {})).prepatch = function (_, vnode) {
       matched.instances[name] = vnode.componentInstance;
-    };
-
-    // register instance in init hook
-    // in case kept-alive component be actived when routes changed
-    data.hook.init = function (vnode) {
-      if (vnode.data.keepAlive &&
-        vnode.componentInstance &&
-        vnode.componentInstance !== matched.instances[name]
-      ) {
-        matched.instances[name] = vnode.componentInstance;
-      }
     };
 
     // resolve props
@@ -10292,24 +10301,16 @@ function fillParams (
   params,
   routeMsg
 ) {
-  params = params || {};
   try {
     var filler =
       regexpCompileCache[path] ||
       (regexpCompileCache[path] = pathToRegexp_1.compile(path));
-
-    // Fix #2505 resolving asterisk routes { name: 'not-found', params: { pathMatch: '/not-found' }}
-    if (params.pathMatch) { params[0] = params.pathMatch; }
-
-    return filler(params, { pretty: true })
+    return filler(params || {}, { pretty: true })
   } catch (e) {
     if (true) {
       warn(false, ("missing param for " + routeMsg + ": " + (e.message)));
     }
     return ''
-  } finally {
-    // delete the 0 if it was added
-    delete params[0];
   }
 }
 
@@ -10488,10 +10489,8 @@ function normalizeLocation (
 ) {
   var next = typeof raw === 'string' ? { path: raw } : raw;
   // named target
-  if (next._normalized) {
+  if (next.name || next._normalized) {
     return next
-  } else if (next.name) {
-    return extend({}, raw)
   }
 
   // relative params
@@ -10583,8 +10582,10 @@ function createMatcher (
         }
       }
 
-      location.path = fillParams(record.path, location.params, ("named route \"" + name + "\""));
-      return _createRoute(record, location, redirectedFrom)
+      if (record) {
+        location.path = fillParams(record.path, location.params, ("named route \"" + name + "\""));
+        return _createRoute(record, location, redirectedFrom)
+      }
     } else if (location.path) {
       location.params = {};
       for (var i = 0; i < pathList.length; i++) {
@@ -10739,12 +10740,7 @@ var positionStore = Object.create(null);
 function setupScroll () {
   // Fix for #1585 for Firefox
   // Fix for #2195 Add optional third attribute to workaround a bug in safari https://bugs.webkit.org/show_bug.cgi?id=182678
-  // Fix for #2774 Support for apps loaded from Windows file shares not mapped to network drives: replaced location.origin with
-  // window.location.protocol + '//' + window.location.host
-  // location.host contains the port and location.hostname doesn't
-  var protocolAndPath = window.location.protocol + '//' + window.location.host;
-  var absolutePath = window.location.href.replace(protocolAndPath, '');
-  window.history.replaceState({ key: getStateKey() }, '', absolutePath);
+  window.history.replaceState({ key: getStateKey() }, '', window.location.href.replace(window.location.origin, ''));
   window.addEventListener('popstate', function (e) {
     saveScrollPosition();
     if (e.state && e.state.key) {
@@ -11316,6 +11312,7 @@ function bindEnterGuard (
 ) {
   return function routeEnterGuard (to, from, next) {
     return guard(to, from, function (cb) {
+      next(cb);
       if (typeof cb === 'function') {
         cbs.push(function () {
           // #750
@@ -11326,7 +11323,6 @@ function bindEnterGuard (
           poll(cb, match.instances, key, isValid);
         });
       }
-      next(cb);
     })
   }
 }
@@ -11351,7 +11347,7 @@ function poll (
 
 /*  */
 
-var HTML5History = /*@__PURE__*/(function (History$$1) {
+var HTML5History = (function (History$$1) {
   function HTML5History (router, base) {
     var this$1 = this;
 
@@ -11439,7 +11435,7 @@ function getLocation (base) {
 
 /*  */
 
-var HashHistory = /*@__PURE__*/(function (History$$1) {
+var HashHistory = (function (History$$1) {
   function HashHistory (router, base, fallback) {
     History$$1.call(this, router, base);
     // check history fallback deeplinking
@@ -11548,23 +11544,7 @@ function getHash () {
   // consistent across browsers - Firefox will pre-decode it!
   var href = window.location.href;
   var index = href.indexOf('#');
-  // empty path
-  if (index < 0) { return '' }
-
-  href = href.slice(index + 1);
-  // decode the hash but not the search or hash
-  // as search(query) is already decoded
-  // https://github.com/vuejs/vue-router/issues/2708
-  var searchIndex = href.indexOf('?');
-  if (searchIndex < 0) {
-    var hashIndex = href.indexOf('#');
-    if (hashIndex > -1) { href = decodeURI(href.slice(0, hashIndex)) + href.slice(hashIndex); }
-    else { href = decodeURI(href); }
-  } else {
-    if (searchIndex > -1) { href = decodeURI(href.slice(0, searchIndex)) + href.slice(searchIndex); }
-  }
-
-  return href
+  return index === -1 ? '' : decodeURI(href.slice(index + 1))
 }
 
 function getUrl (path) {
@@ -11592,7 +11572,7 @@ function replaceHash (path) {
 
 /*  */
 
-var AbstractHistory = /*@__PURE__*/(function (History$$1) {
+var AbstractHistory = (function (History$$1) {
   function AbstractHistory (router, base) {
     History$$1.call(this, router, base);
     this.stack = [];
@@ -11715,19 +11695,7 @@ VueRouter.prototype.init = function init (app /* Vue component instance */) {
 
   this.apps.push(app);
 
-  // set up app destroyed handler
-  // https://github.com/vuejs/vue-router/issues/2639
-  app.$once('hook:destroyed', function () {
-    // clean out app from this.apps array once destroyed
-    var index = this$1.apps.indexOf(app);
-    if (index > -1) { this$1.apps.splice(index, 1); }
-    // ensure we still have a main app or null if no apps
-    // we do not release the router so it can be reused
-    if (this$1.app === app) { this$1.app = this$1.apps[0] || null; }
-  });
-
-  // main app previously initialized
-  // return as we don't need to set up new history listener
+  // main app already initialized.
   if (this.app) {
     return
   }
@@ -11817,10 +11785,9 @@ VueRouter.prototype.resolve = function resolve (
   current,
   append
 ) {
-  current = current || this.history.current;
   var location = normalizeLocation(
     to,
-    current,
+    current || this.history.current,
     append,
     this
   );
@@ -11861,7 +11828,7 @@ function createHref (base, fullPath, mode) {
 }
 
 VueRouter.install = install;
-VueRouter.version = '3.0.7';
+VueRouter.version = '3.0.2';
 
 if (inBrowser && window.Vue) {
   window.Vue.use(VueRouter);
@@ -27794,8 +27761,8 @@ var LoadersAndAnimations = function LoadersAndAnimations() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\laravel-vue-spa\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\laravel-vue-spa\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! d:\laragon\www\laravel-vue-spa\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! d:\laragon\www\laravel-vue-spa\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

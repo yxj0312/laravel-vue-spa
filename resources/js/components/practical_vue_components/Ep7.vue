@@ -14,6 +14,10 @@
             <tab title="Third">
                 <p>Hello world and out.</p>
             </tab>
+
+            <tab title="Wew" active>
+                <p>It works!</p>
+            </tab>
         </tabs>
     </div>
 </template>
