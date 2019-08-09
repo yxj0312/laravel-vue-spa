@@ -3492,7 +3492,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   data: function data() {
     return {
-      show: false
+      isActive: this.active
     };
   },
   computed: {},
@@ -3510,6 +3510,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -3557,7 +3558,7 @@ __webpack_require__.r(__webpack_exports__);
       // Looping over all of the children, and we are updating its show property
       // Every single tab will have its show prop set to false, except for the one that is the actively selected tab.
       this.tabs.map(function (tab) {
-        return tab.show = tab == _activeTab;
+        return tab.isActive = tab == _activeTab;
       });
     }
   },
@@ -8537,7 +8538,12 @@ var render = function() {
     "div",
     {
       directives: [
-        { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.isActive,
+          expression: "isActive"
+        }
       ],
       attrs: { role: "tabpanel" }
     },
@@ -8572,23 +8578,24 @@ var render = function() {
     [
       _c(
         "ul",
-        { staticClass: "border-b border-grey-light flex mb-4 list-reset" },
+        {
+          staticClass: "border-b border-grey-light flex mb-4 list-reset",
+          attrs: { role: "roleList" }
+        },
         _vm._l(_vm.tabs, function(tab, index) {
           return _c(
             "li",
             {
               key: index,
               staticClass: "px-4 py-2 bg-white",
-              class: {
-                "border border-b-0 rounded-t-lg ": tab == _vm.activeTab
-              },
-              style: tab == _vm.activeTab ? "margin-bottom: -1px" : ""
+              class: { "border border-b-0 rounded-t-lg ": tab.isActive },
+              style: tab.isActive ? "margin-bottom: -1px" : ""
             },
             [
               _c("button", {
                 staticClass: "focus:outline-none",
-                class: { "font-bold": tab == _vm.activeTab },
-                attrs: { role: "tab" },
+                class: { "font-bold": tab.isActive },
+                attrs: { role: "tab", "aria-selected": tab.isActive },
                 domProps: { textContent: _vm._s(tab.title) },
                 on: {
                   click: function($event) {
