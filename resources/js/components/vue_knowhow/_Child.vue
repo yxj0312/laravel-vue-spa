@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div>        
         <grandChild>
             <template>
                 <div slot="activator">

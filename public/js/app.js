@@ -3636,6 +3636,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -8787,16 +8791,36 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "child",
+    "div",
     [
-      [
-        _c("div", { attrs: { slot: "activator" }, slot: "activator" }, [
-          _vm._v("\n            Click "),
-          _c("b", [_vm._v("Me")])
-        ])
-      ]
+      _c(
+        "a",
+        {
+          attrs: {
+            href:
+              "https://stackoverflow.com/questions/53430731/vuejs-nested-slots-how-to-pass-slot-to-grandchild"
+          }
+        },
+        [_vm._v("Links")]
+      ),
+      _vm._v(" "),
+      _c(
+        "child",
+        [
+          [
+            _vm._v(
+              "\r\n            https://stackoverflow.com/questions/53430731/vuejs-nested-slots-how-to-pass-slot-to-grandchild\r\n            "
+            ),
+            _c("div", { attrs: { slot: "activator" }, slot: "activator" }, [
+              _vm._v("\r\n                Click "),
+              _c("b", [_vm._v("Me")])
+            ])
+          ]
+        ],
+        2
+      )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
