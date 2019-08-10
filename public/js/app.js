@@ -3674,6 +3674,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -8818,19 +8822,31 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "grandChild",
+    "div",
     [
-      [
-        _c(
-          "div",
-          { attrs: { slot: "activator" }, slot: "activator" },
-          [_vm._t("activator")],
-          2
-        )
-      ],
-      _vm._v("\n\n    This is some text\n")
+      _c(
+        "grandChild",
+        [
+          [
+            _c(
+              "div",
+              { attrs: { slot: "activator" }, slot: "activator" },
+              [_vm._t("activator")],
+              2
+            ),
+            _vm._v(
+              "\n            This is some text, which won't displayed\n        "
+            )
+          ],
+          _vm._v("\n            This is some text, which won't displayed\n    ")
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("grandChild"),
+      _vm._v("\n    This is some text\n")
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []

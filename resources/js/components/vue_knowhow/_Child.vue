@@ -1,14 +1,18 @@
 <template>
-    <grandChild>
-        <template>
-            <div slot="activator">
-                <slot name="activator"></slot>
-            </div>
-        </template>
+    <div>
+        <grandChild>
+            <template>
+                <div slot="activator">
+                    <slot name="activator"></slot>
+                </div>
+                This is some text, which won't displayed
+            </template>
+                This is some text, which won't displayed
+        </grandChild>
 
+        <grandChild></grandChild>
         This is some text
-    </grandChild>
-
+    </div>
 </template>
 
 <script>
