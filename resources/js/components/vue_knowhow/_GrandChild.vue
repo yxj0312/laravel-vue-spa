@@ -3,6 +3,8 @@
         <a href="#" @click="toggle =! toggle">
             <slot name="activator">Default</slot>
 
+            <slot name="hello">Default</slot>
+
             <div v-if="toggle">This appears and disappears</div>
         </a>
     </div>

@@ -12,6 +12,7 @@
 
         <grandChild></grandChild>
         This is some text
+
     </div>
 </template>
 
@@ -21,7 +22,7 @@
         props: [],
 
         components: {
-            grandChild
+            grandChild,
         },
 
         data() {
