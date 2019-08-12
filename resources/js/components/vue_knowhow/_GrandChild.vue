@@ -6,6 +6,8 @@
             <slot name="hello">Default</slot>
 
             <div v-if="toggle">This appears and disappears</div>
+
+            <slot name="ok"></slot>
         </a>
     </div>
 </template>
