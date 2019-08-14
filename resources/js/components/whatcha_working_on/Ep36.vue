@@ -1,21 +1,24 @@
 <template>
-    <div>
-        <article>
-            <h1 class="font-bold mb-4">title</h1>
-            <div class="mb-6">body</div>
-        </article>
+    <div> 
+       <blog-post :post='this.post'></blog-post> 
     </div>
 </template>
 
 <script>
+    import blogPost from './_BlogPost'
     export default {
         props: [],
 
-        components: {},
+        components: {
+            blogPost
+        },
 
         data() {
             return {
-                
+                post: {
+                    title: 'hello',
+                    body: 'nihao'
+                }
             }
         },
 
