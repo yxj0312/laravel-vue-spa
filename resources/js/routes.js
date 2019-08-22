@@ -20,6 +20,7 @@ import Ep38 from './components/whatcha_working_on/Ep38';
 import Ep21 from './components/whatcha_working_on/Ep21';
 import Ep23 from './components/vuextodo/Ep23';
 import NestVueSlot from './components/vue_knowhow/NestVueSlot';
+import CounterHot from './components/vuex_example/counter_hot/CounterHot';
 
 let LoadersAndAnimations = () =>
     import(/* webpackChunkName: "loaders-and-animations.bundle" */ './components/LoadersAndAnimations');
@@ -144,6 +145,11 @@ export default {
         {
             path: '/vue-knowhow/nest-vue-slot',
             component: NestVueSlot
+        },
+
+        {
+            path: '/vuex-example/counter-hot',
+            component: CounterHot
         },
     ]
 }

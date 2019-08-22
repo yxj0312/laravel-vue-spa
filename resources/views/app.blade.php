@@ -86,10 +86,11 @@
                             </div>
 
                             <div class="mb-10">
-                                <h5 class="uppercase font-bold mb-5 text-base">Vuex Example ToDo-List</h5>
+                                <h5 class="uppercase font-bold mb-5 text-base">Vuex Example</h5>
 
                                 <ul class="list-reset">
                                     <li class="text-sm leading-loose"><router-link to="/vuextodo/ep23" class="text-black">Ep23: Learn Vuex With Me: Part 3</router-link></li>
+                                    <li class="text-sm leading-loose"><router-link to="/vuex-example/counter-hot" class="text-black">Hot Reloading</router-link></li>
                                 </ul>
                             </div>
 
