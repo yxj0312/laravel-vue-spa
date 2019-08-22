@@ -6,11 +6,16 @@ import * as mutations from './mutations'
 
 Vue.use(Vuex);
 
-// const store = new Vuex.Store({
-//   state,
-//   getters,
-//   actions,
-//   mutations
-// })
+const state = {
+  count: 0,
+  history: []
+}
 
-// export default store
+const store = new Vuex.Store({
+  state,
+  getters,
+  actions,
+  mutations
+})
+
+export default store

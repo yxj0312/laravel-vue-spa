@@ -1,10 +1,12 @@
 <template>
     <div>
-        Value: 1
+        Value: {{ count }}
     </div>
 </template>
 
 <script>
+    import { mapGetters, mapActions } from 'vuex'
+    
     export default {
         props: [],
 
@@ -16,9 +18,9 @@
             }
         },
 
-        computed: {
-
-        },
+        computed: mapGetters([
+            'count',
+        ]),
 
         methods: {
 
