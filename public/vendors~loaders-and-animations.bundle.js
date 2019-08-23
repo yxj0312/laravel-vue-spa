@@ -2001,11 +2001,12 @@ var FontManager = (function(){
         var i = 0, len = this.chars.length;
         while( i < len) {
             if(this.chars[i].ch === char && this.chars[i].style === style && this.chars[i].fFamily === font){
+
                 return this.chars[i];
             }
             i+= 1;
         }
-        if(console && console.warn) {
+        if((typeof char === 'string' && char.charCodeAt(0) !== 13 || !char) && console && console.warn) {
             console.warn('Missing character from exported characters list: ', char, style, font);
         }
         return emptyChar;
@@ -2942,10 +2943,13 @@ var ShapePropertyFactory = (function(){
     }
 
     function processEffectsSequence() {
-        if(this.elem.globalData.frameId === this.frameId || !this.effectsSequence.length) {
+        if (this.elem.globalData.frameId === this.frameId) {
+            return;
+        } else if (!this.effectsSequence.length) {
+            this._mdf = false;
             return;
         }
-        if(this.lock) {
+        if (this.lock) {
             this.setVValue(this.pv);
             return;
         }
@@ -3351,11 +3355,13 @@ function ShapeModifier(){}
 ShapeModifier.prototype.initModifierProperties = function(){};
 ShapeModifier.prototype.addShapeToModifier = function(){};
 ShapeModifier.prototype.addShape = function(data){
-    if(!this.closed){
+    if (!this.closed) {
+        // Adding shape to dynamic properties. It covers the case where a shape has no effects applied, to reset it's _mdf state on every tick.
+        data.sh.container.addDynamicProperty(data.sh);
         var shapeData = {shape:data.sh, data: data, localShapeCollection:shapeCollection_pool.newShapeCollection()};
         this.shapes.push(shapeData);
         this.addShapeToModifier(shapeData);
-        if(this._isAnimated) {
+        if (this._isAnimated) {
             data.setAsAnimated();
         }
     }
@@ -4167,7 +4173,7 @@ var ImagePreloader = (function(){
         canvas.width = 1;
         canvas.height = 1;
         var ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#FF0000';
+        ctx.fillStyle = 'rgba(0,0,0,0)';
         ctx.fillRect(0, 0, 1, 1);
         return canvas;
     }())
@@ -4323,7 +4329,10 @@ var assetLoader = (function(){
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', path, true);
 		// set responseType after calling open or IE will break.
-		xhr.responseType = "json";
+		try {
+		    // This crashes on Android WebView prior to KitKat
+		    xhr.responseType = "json";
+		} catch (err) {}
 	    xhr.send();
 	    xhr.onreadystatechange = function () {
 	        if (xhr.readyState == 4) {
@@ -5133,11 +5142,23 @@ TextProperty.prototype.buildFinalText = function(text) {
     var combinedCharacters = FontManager.getCombinedCharacterCodes();
     var charactersArray = [];
     var i = 0, len = text.length;
+    var charCode;
     while (i < len) {
-        if (combinedCharacters.indexOf(text.charCodeAt(i)) !== -1) {
+        charCode = text.charCodeAt(i);
+        if (combinedCharacters.indexOf(charCode) !== -1) {
             charactersArray[charactersArray.length - 1] += text.charAt(i);
         } else {
-            charactersArray.push(text.charAt(i));
+            if (charCode >= 0xD800 && charCode <= 0xDBFF) {
+                charCode = text.charCodeAt(i + 1);
+                if (charCode >= 0xDC00 && charCode <= 0xDFFF) {
+                    charactersArray.push(text.substr(i, 2));
+                    ++i;
+                } else {
+                    charactersArray.push(text.charAt(i));
+                }
+            } else {
+                charactersArray.push(text.charAt(i));
+            }
         }
         i += 1;
     }
@@ -5190,9 +5211,9 @@ TextProperty.prototype.completeTextData = function(documentData) {
     }
     documentData.fWeight = fontData.fWeight || fWeight;
     documentData.fStyle = fStyle;
-    len = documentData.t.length;
     documentData.finalSize = documentData.s;
     documentData.finalText = this.buildFinalText(documentData.t);
+    len = documentData.finalText.length;
     documentData.finalLineHeight = documentData.lh;
     var trackingOffset = documentData.tr/1000*documentData.finalSize;
     var charCode;
@@ -5856,6 +5877,26 @@ function SVGRenderer(animationItem, config){
     this.layers = null;
     this.renderedFrame = -1;
     this.svgElement = createNS('svg');
+    var ariaLabel = '';
+    if (config && config.title) {
+        var titleElement = createNS('title');
+        var titleId = createElementID();
+        titleElement.setAttribute('id', titleId);
+        titleElement.textContent = config.title;
+        this.svgElement.appendChild(titleElement);
+        ariaLabel += titleId;
+    }
+    if (config && config.description) {
+        var descElement = createNS('desc');
+        var descId = createElementID();
+        descElement.setAttribute('id', descId);
+        descElement.textContent = config.description;
+        this.svgElement.appendChild(descElement);
+        ariaLabel += ' ' + descId;
+    }
+    if (ariaLabel) {
+        this.svgElement.setAttribute('aria-labelledby', ariaLabel)
+    }
     var defs = createNS( 'defs');
     this.svgElement.appendChild(defs);
     var maskElement = createNS('g');
@@ -5870,6 +5911,7 @@ function SVGRenderer(animationItem, config){
         viewBoxSize: (config && config.viewBoxSize) || false,
         className: (config && config.className) || ''
     };
+
     this.globalData = {
         _mdf: false,
         frameNum: -1,
@@ -6320,6 +6362,8 @@ CanvasRenderer.prototype.updateContainerSize = function () {
     this.canvasContext.rect(0,0,this.transformCanvas.w,this.transformCanvas.h);
     this.canvasContext.closePath();
     this.canvasContext.clip();
+
+    this.renderFrame(this.renderedFrame, true);
 };
 
 CanvasRenderer.prototype.destroy = function () {
@@ -6338,14 +6382,14 @@ CanvasRenderer.prototype.destroy = function () {
     this.destroyed = true;
 };
 
-CanvasRenderer.prototype.renderFrame = function(num){
-    if((this.renderedFrame == num && this.renderConfig.clearCanvas === true) || this.destroyed || num === -1){
+CanvasRenderer.prototype.renderFrame = function(num, forceRender){
+    if((this.renderedFrame === num && this.renderConfig.clearCanvas === true && !forceRender) || this.destroyed || num === -1){
         return;
     }
     this.renderedFrame = num;
     this.globalData.frameNum = num - this.animationItem._isFirstFrame;
     this.globalData.frameId += 1;
-    this.globalData._mdf = !this.renderConfig.clearCanvas;
+    this.globalData._mdf = !this.renderConfig.clearCanvas || forceRender;
     this.globalData.projectInterface.currentFrame = num;
 
      // console.log('--------');
@@ -6723,8 +6767,7 @@ function MaskElement(data,element,globalData) {
     var rect, expansor, feMorph,x;
     var maskType = 'clipPath', maskRef = 'clip-path';
     for (i = 0; i < len; i++) {
-
-        if((properties[i].mode !== 'a' && properties[i].mode !== 'n')|| properties[i].inv || properties[i].o.k !== 100){
+        if((properties[i].mode !== 'a' && properties[i].mode !== 'n')|| properties[i].inv || properties[i].o.k !== 100 || properties[i].o.x){
             maskType = 'mask';
             maskRef = 'mask';
         }
@@ -6765,7 +6808,7 @@ function MaskElement(data,element,globalData) {
             expansor = createNS('filter');
             expansor.setAttribute('id',filterID);
             feMorph = createNS('feMorphology');
-            feMorph.setAttribute('operator','dilate');
+            feMorph.setAttribute('operator','erode');
             feMorph.setAttribute('in','SourceGraphic');
             feMorph.setAttribute('radius','0');
             expansor.appendChild(feMorph);
@@ -8301,6 +8344,7 @@ SVGTextElement.prototype.buildNewText = function(){
         this.layerElement.setAttribute('font-style', fStyle);
         this.layerElement.setAttribute('font-weight', fWeight);
     }
+    this.layerElement.setAttribute('aria-label', documentData.t);
 
     var letters = documentData.l || [];
     var usesGlyphs = !!this.globalData.fontManager.chars;
@@ -8453,6 +8497,7 @@ SVGTextElement.prototype.renderInnerContent = function(){
         }
     }
 };
+
 function SVGShapeElement(data,globalData,comp){
     //List of drawable elements
     this.shapes = [];
@@ -8820,6 +8865,45 @@ SVGFillFilter.prototype.renderFrame = function(forceRender){
         this.matrixFilter.setAttribute('values','0 0 0 0 '+color[0]+' 0 0 0 0 '+color[1]+' 0 0 0 0 '+color[2]+' 0 0 0 '+opacity+' 0');
     }
 };
+function SVGGaussianBlurEffect(filter, filterManager){
+    // Outset the filter region by 100% on all sides to accommodate blur expansion.
+    filter.setAttribute('x','-100%');
+    filter.setAttribute('y','-100%');
+    filter.setAttribute('width','300%');
+    filter.setAttribute('height','300%');
+
+    this.filterManager = filterManager;
+    var feGaussianBlur = createNS('feGaussianBlur');
+    filter.appendChild(feGaussianBlur);
+    this.feGaussianBlur = feGaussianBlur;
+}
+
+SVGGaussianBlurEffect.prototype.renderFrame = function(forceRender){
+    if(forceRender || this.filterManager._mdf){
+        // Empirical value, matching AE's blur appearance.
+        var kBlurrinessToSigma = 0.3;
+        var sigma = this.filterManager.effectElements[0].p.v * kBlurrinessToSigma;
+
+        // Dimensions mapping:
+        //
+        //   1 -> horizontal & vertical
+        //   2 -> horizontal only
+        //   3 -> vertical only
+        //
+        var dimensions = this.filterManager.effectElements[1].p.v;
+        var sigmaX = (dimensions == 3) ? 0 : sigma;
+        var sigmaY = (dimensions == 2) ? 0 : sigma;
+
+        this.feGaussianBlur.setAttribute('stdDeviation', sigmaX + " " + sigmaY);
+
+        // Repeat edges mapping:
+        //
+        //   0 -> off -> duplicate
+        //   1 -> on  -> wrap
+        var edgeMode = (this.filterManager.effectElements[2].p.v == 1) ? 'wrap' : 'duplicate';
+        this.feGaussianBlur.setAttribute('edgeMode', edgeMode);
+    }
+}
 function SVGStrokeEffect(elem, filterManager){
     this.initialized = false;
     this.filterManager = filterManager;
@@ -9270,6 +9354,9 @@ function SVGEffects(elem){
         }else if(elem.data.ef[i].ty === 28){
             //count += 1;
             filterManager = new SVGMatte3Effect(fil, elem.effectsManager.effectElements[i], elem);
+        }else if(elem.data.ef[i].ty === 29){
+            count += 1;
+            filterManager = new SVGGaussianBlurEffect(fil, elem.effectsManager.effectElements[i]);
         }
         if(filterManager) {
             this.filters.push(filterManager);
@@ -9385,7 +9472,6 @@ CVBaseElement.prototype.hide = CVBaseElement.prototype.hideElement;
 CVBaseElement.prototype.show = CVBaseElement.prototype.showElement;
 
 function CVImageElement(data, globalData, comp){
-    this.failed = false;
     this.assetData = globalData.getAssetData(data.refId);
     this.img = globalData.imageLoader.getImage(this.assetData);
     this.initElement(data,globalData,comp);
@@ -9423,9 +9509,6 @@ CVImageElement.prototype.createContent = function(){
 };
 
 CVImageElement.prototype.renderInnerContent = function(parentMatrix){
-    if (this.failed) {
-        return;
-    }
     this.canvasContext.drawImage(this.img, 0, 0);
 };
 
@@ -10627,6 +10710,7 @@ HTextElement.prototype.buildNewText = function(){
                 } else {
 
                     tParent = createTag('div');
+                    tParent.style.lineHeight = 0;
                     tCont = createNS('svg');
                     tCont.appendChild(tSpan);
                     styleDiv(tParent);
@@ -12167,7 +12251,7 @@ var ExpressionManager = (function(){
         var height = elem.data.sh ? elem.data.sh : 0;
         var name = elem.data.nm;
         var loopIn, loop_in, loopOut, loop_out, smooth;
-        var toWorld,fromWorld,fromComp,toComp,fromCompToSurface, position, rotation, anchorPoint, scale, thisLayer,thisComp,mask,valueAtTime,velocityAtTime;
+        var toWorld,fromWorld,fromComp,toComp,fromCompToSurface, position, rotation, anchorPoint, scale, thisLayer, thisComp,mask,valueAtTime,velocityAtTime;
         var __expression_functions = [];
         if(data.xf) {
             var i, len = data.xf.length;
@@ -12336,12 +12420,8 @@ var ExpressionManager = (function(){
                 time: data.k[ind].t/elem.comp.globalData.frameRate,
                 value: []
             };
-            var arr;
-            if(ind === data.k.length - 1 && !data.k[ind].h){
-                arr = data.k[ind-1].e;
-            }else{
-                arr = data.k[ind].s;
-            }
+            var arr = data.k[ind].hasOwnProperty('s') ? data.k[ind].s : data.k[ind - 1].e;
+
             len = arr.length;
             for(i=0;i<len;i+=1){
                 ob[i] = arr[i];
@@ -12886,6 +12966,9 @@ var expressionHelpers = (function(){
             var xLength = pt2[0] - pt1[0];
             var yLength = pt2[1] - pt1[1];
             var magnitude = Math.sqrt(Math.pow(xLength,2) + Math.pow(yLength,2));
+            if (magnitude === 0) {
+                return [0,0];
+            }
             var unitVector = vectorType === 'tangent' ? [xLength/magnitude, yLength/magnitude] : [-yLength/magnitude, xLength/magnitude];
             return unitVector;
         },
@@ -13500,6 +13583,7 @@ var ShapeExpressionInterface = (function(){
             },
             '_name': { value: shape.nm },
             'ix': { value: shape.ix },
+            'propertyIndex': { value: shape.ix },
             'mn': { value: shape.mn }
         });
         return interfaceFunction;
@@ -13693,12 +13777,12 @@ var LayerExpressionInterface = (function (){
     };
 }());
 
-var CompExpressionInterface = (function (){
-    return function(comp){
-        function _thisLayerFunction(name){
-            var i=0, len = comp.layers.length;
-            while(i<len){
-                if(comp.layers[i].nm === name || comp.layers[i].ind === name){
+var CompExpressionInterface = (function () {
+    return function(comp) {
+        function _thisLayerFunction(name) {
+            var i = 0, len = comp.layers.length;
+            while ( i < len) {
+                if (comp.layers[i].nm === name || comp.layers[i].ind === name) {
                     return comp.elements[i].layerInterface;
                 }
                 i += 1;
@@ -13706,13 +13790,13 @@ var CompExpressionInterface = (function (){
             return null;
             //return {active:false};
         }
-        Object.defineProperty(_thisLayerFunction, "_name", { value:comp.data.nm });
+        Object.defineProperty(_thisLayerFunction, "_name", { value: comp.data.nm });
         _thisLayerFunction.layer = _thisLayerFunction;
         _thisLayerFunction.pixelAspect = 1;
         _thisLayerFunction.height = comp.data.h || comp.globalData.compSize.h;
         _thisLayerFunction.width = comp.data.w || comp.globalData.compSize.w;
         _thisLayerFunction.pixelAspect = 1;
-        _thisLayerFunction.frameDuration = 1/comp.globalData.frameRate;
+        _thisLayerFunction.frameDuration = 1 / comp.globalData.frameRate;
         _thisLayerFunction.displayStartTime = 0;
         _thisLayerFunction.numLayers = comp.layers.length;
         return _thisLayerFunction;
@@ -13964,12 +14048,20 @@ var MaskManagerInterface = (function(){
 	}
 	Object.defineProperty(MaskInterface.prototype, 'maskPath', {
         get: function(){
-                if(this._mask.prop.k){
-                    this._mask.prop.getValue();
-                }
-                return this._mask.prop;
+            if(this._mask.prop.k){
+                this._mask.prop.getValue();
             }
-        });
+            return this._mask.prop;
+        }
+    });
+	Object.defineProperty(MaskInterface.prototype, 'maskOpacity', {
+        get: function(){
+            if(this._mask.op.k){
+                this._mask.op.getValue();
+            }
+            return this._mask.op.v * 100;
+        }
+    });
 
 	var MaskManager = function(maskManager, elem){
 		var _maskManager = maskManager;
@@ -14316,7 +14408,7 @@ GroupEffect.prototype.init = function(data,element){
     lottiejs.unfreeze = animationManager.unfreeze;
     lottiejs.getRegisteredAnimations = animationManager.getRegisteredAnimations;
     lottiejs.__getFactory = getFactory;
-    lottiejs.version = '5.5.0';
+    lottiejs.version = '5.5.7';
 
     function checkReady() {
         if (document.readyState === "complete") {
